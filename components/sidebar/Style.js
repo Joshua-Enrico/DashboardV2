@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-import { GlobalCssVr } from '../../styles/Colors';
+
+
+
 
 const MainContainer = styled.aside`
     height: 100vh;
@@ -27,7 +29,7 @@ const H2 = styled.h2`
 `;
 
 const Span = styled.span`
-    color: ${GlobalCssVr.Cdanger};
+    color: ${props => props.theme.Cdanger};
 
 `;
 const Close = styled.div`
@@ -56,12 +58,26 @@ const RoutContainer = styled.div`
 
 const Section = styled.div`
     display: flex;
-    color: ${GlobalCssVr.CinfoDark};
+    color: ${props => props.theme.CinfoDark};
     margin-left: 2rem;
     gap: 1rem;
     align-items: center;
     position: relative;
     height: 3.7rem;
+
+    &.active {
+        background: ${props => props.theme.Clight};
+        color: ${props => props.theme.Cprimary};
+        margin-left: 0;
+    }
+
+    &.active:before {
+        content: '';
+        width: 0.5rem;
+        height: 100%;
+        background: ${props => props.theme.Cprimary};
+    }
+
     transition: all 300ms ease;
     & > svg {
         font-size: 1.6rem;
@@ -76,7 +92,7 @@ const Page = styled.div`
 
 
 const Link = styled.span`
-    color: ${GlobalCssVr.Cdark};
+    color: ${props => props.theme.Cdark};
 `;
 
 const H3 = styled.h3`

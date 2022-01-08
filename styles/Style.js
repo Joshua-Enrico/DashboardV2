@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { GlobalCssVr } from './Colors';
 
 
 export const MainContainer = styled.div`
@@ -12,31 +11,31 @@ export const MainContainer = styled.div`
 
     
     .text-muted {
-        color: ${GlobalCssVr.CinfoDark};
+        color: ${props => props.theme.CinfoDark};
       }
 
     p{
-        color: ${GlobalCssVr.CdarkVariant};
+        color: ${props => props.theme.CdarkVariant};
     }
 
     b{
-        color: ${GlobalCssVr.Cdark};
+        color: ${props => props.theme.Cdark};
     }
 
     .primary{
-        color: ${GlobalCssVr.Cprimary};
+        color: ${props => props.theme.Cprimary};
     }
 
     .danger{
-        color: ${GlobalCssVr.Cdanger};
+        color: ${props => props.theme.Cdanger};
     }
 
     .success{
-        color: ${GlobalCssVr.Csuccess};
+        color: ${props => props.theme.Csuccess};
     }
 
     .warning{
-        color: ${GlobalCssVr.Cwarning};
+        color: ${props => props.theme.Cwarning};
     }
 
 `
