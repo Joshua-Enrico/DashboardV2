@@ -13,6 +13,7 @@ const MainContainer = styled.aside`
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1.4rem;
+    margin-top: 1.4rem;
 `;
 
  const Logo = styled.div`
@@ -64,11 +65,18 @@ const Section = styled.div`
     align-items: center;
     position: relative;
     height: 3.7rem;
+    cursor: pointer;
+    & > svg {
+        transition: all 300ms ease;
+    }
 
     &.active {
         background: ${props => props.theme.Clight};
         color: ${props => props.theme.Cprimary};
         margin-left: 0;
+        & > svg {
+            margin-left: calc(2rem - 20px);
+        }
     }
 
     &.active:before {
@@ -81,6 +89,13 @@ const Section = styled.div`
     transition: all 300ms ease;
     & > svg {
         font-size: 1.6rem;
+    }
+
+    &:hover {
+        color: ${props => props.theme.Cprimary};
+        & > svg {
+            margin-left: calc(2rem - 20px);
+        }
     }
 `;
 
@@ -99,8 +114,16 @@ const H3 = styled.h3`
     font-weight: 500;
 `;
 
+const Nmessage = styled.span`
+    background: ${props => props.theme.Cdanger};
+    color: ${props => props.theme.Cwhite};
+    padding: 2px 10px;
+    font-size: 11px;
+    border-radius: ${props => props.theme.BorderRadius1};
+`
 
 
 
 
-export { MainContainer, TopBar, Logo, Image, H2, Span, Close, SideBarNav, Link, H3, Section, Pages, Page, RoutContainer };
+
+export { MainContainer, TopBar, Logo, Image, H2, Span, Close, SideBarNav, Link, H3, Section, Pages, Page, RoutContainer, Nmessage };

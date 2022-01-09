@@ -39,3 +39,11 @@ export const MainContainer = styled.div`
     }
 
 `
+
+export const Main = styled.main`
+
+`
+
+export const Title = styled.h1`
+
+`

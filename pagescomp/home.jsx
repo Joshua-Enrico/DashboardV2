@@ -1,8 +1,10 @@
 import Head from 'next/head'
 import { useSelector } from 'react-redux'
 import SideBar from '../components/sidebar/SideBar'
-import { MainContainer } from '../styles/Style'
+import Insights from '../components/insights/Insights'
+import { Main, MainContainer, Title } from '../styles/Style'
 import { ThemeProvider } from 'styled-components';
+import Date from '../components/date/Date';
 
 
 const Homepage = () => {
@@ -21,6 +23,11 @@ const Homepage = () => {
         </Head>
         <MainContainer>
           <SideBar />
+          <Main>
+            <Title>Dashboard</Title>
+            <Date/>
+            <Insights/>
+          </Main>
         </MainContainer>
       </div>
       </ThemeProvider>

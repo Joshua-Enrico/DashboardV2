@@ -1,13 +1,16 @@
 // Styles clases for this component
 import { ThemeProvider } from 'styled-components';
-import { MainContainer, TopBar, Logo, Image, H2, Span, Close, SideBarNav, Link, H3, Section, Pages, Page, RoutContainer } from "./Style";
+import { MainContainer, TopBar, Logo, Image, H2, Span, Close,
+         SideBarNav, Link, H3, Section, Pages, Page, RoutContainer,
+          Nmessage } from "./Style";
 //icons
 import { MdClose, MdSpaceDashboard } from 'react-icons/md';
 import { BsCircle, BsPeopleFill } from 'react-icons/bs';
 import { BiStats } from 'react-icons/bi';
 import { AiOutlineMail } from 'react-icons/ai';
 import { HiOutlineLogout } from 'react-icons/hi';
-// handle themes with redux
+
+// handle theme with redux
 import { useSelector, useDispatch } from 'react-redux';
 import { lightTheme, darkTheme } from '../../styles/Theme';
 import { SwitchTheme } from '../../redux/ThemeRedux';
@@ -33,7 +36,7 @@ const SideBar = () => {
                 </TopBar>
                 <SideBarNav>
                     <RoutContainer>
-                        <Section className="active" >
+                        <Section className="active">
                             <MdSpaceDashboard />
                             <H3>Dashboard</H3>
                         </Section>
@@ -80,6 +83,7 @@ const SideBar = () => {
                         <Section >
                             <AiOutlineMail />
                             <H3>Notifications</H3>
+                            <Nmessage>3</Nmessage>
                         </Section>
                         <Pages>
                             <Page>
