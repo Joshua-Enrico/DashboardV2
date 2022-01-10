@@ -2,9 +2,13 @@ import Head from 'next/head'
 import { useSelector } from 'react-redux'
 import SideBar from '../components/sidebar/SideBar'
 import Insights from '../components/insights/Insights'
-import { Main, MainContainer, Title } from '../styles/Style'
+import { Main, MainContainer, Title, RightSide } from '../styles/Style'
 import { ThemeProvider } from 'styled-components';
 import Date from '../components/date/Date';
+import RecentOrds from '../components/recentOrders/RecentOrds'
+import  TopRight  from '../components/topright/TopRight'
+import RecentUpdates from '../components/recentUpdates/RecentUpdates'
+import SalesAnalytics from '../components/salesAnalytics/SalesAnalytics'
 
 
 const Homepage = () => {
@@ -27,7 +31,13 @@ const Homepage = () => {
             <Title>Dashboard</Title>
             <Date/>
             <Insights/>
+            <RecentOrds/>
           </Main>
+          <RightSide>
+              <TopRight/>
+              <RecentUpdates/>
+              <SalesAnalytics/>
+          </RightSide>
         </MainContainer>
       </div>
       </ThemeProvider>
