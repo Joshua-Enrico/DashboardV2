@@ -168,7 +168,7 @@ const Page = styled.div`
 `;
 
 
-const Link = styled.span`
+const LinkPage = styled.span`
     color: ${props => props.theme.Cdark};
 `;
 
@@ -194,4 +194,4 @@ const Nmessage = styled.span`
 
 
 
-export { MainContainer, TopBar, Logo, Image, H2, Span, Close, SideBarNav, Link, H3, Section, Pages, Page, RoutContainer, Nmessage };
+export { MainContainer, TopBar, Logo, Image, H2, Span, Close, SideBarNav, LinkPage, H3, Section, Pages, Page, RoutContainer, Nmessage };

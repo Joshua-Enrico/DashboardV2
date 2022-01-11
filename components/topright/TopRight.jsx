@@ -12,6 +12,8 @@ import { GiSettingsKnobs } from 'react-icons/gi';
 import { useRef } from "react";
 import { useClickAway } from 'react-use';
 
+// nextjs link
+import Link from 'next/link'
 
 
 const TopRight = () => {
@@ -28,7 +30,7 @@ const TopRight = () => {
     // handle dropdown
     let active = false;
     const DropDownTgl = (e, id) => {
-            const element = document.getElementById(id);
+        const element = document.getElementById(id);
         if (active) {
             element.classList.remove("active");
             active = false;
@@ -65,21 +67,23 @@ const TopRight = () => {
                     <Photo src="ProfileImg.png" />
                 </UserPhoto>
                 <DropDownContainer ref={ref} id="DropCt">
-                <DropDown>
-                    <Items>
-                        <GiSettingsKnobs/>
-                        Theme
-                    </Items>
-                    <Items>
-                        <AiOutlineSetting/>
-                        Setting
-                    </Items>
-                    <Items>
-                        <HiOutlineLogout />
-                        Logout
-                    </Items>
-                </DropDown>
-            </DropDownContainer>
+                    <DropDown>
+                        <Items>
+                            <GiSettingsKnobs />
+                            Theme
+                        </Items>
+                        <Link href="/settings">
+                        <Items>
+                            <AiOutlineSetting />
+                            Setting
+                        </Items>
+                        </Link>
+                            <Items>
+                                <HiOutlineLogout />
+                                Logout
+                            </Items>
+                    </DropDown>
+                </DropDownContainer>
             </Profile>
         </TopRightContainer>
     )

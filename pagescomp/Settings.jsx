@@ -34,15 +34,11 @@ const Settings = () => {
         <MainContainer>
           <div></div>
           <Main>
-            <Title>Dashboard</Title>
-            <Date />
-            <Insights />
-            <RecentOrds />
+
           </Main>
           <RightSide>
             <TopRight />
-            <RecentUpdates />
-            <SalesAnalytics />
+
           </RightSide>
         </MainContainer>
       </div>

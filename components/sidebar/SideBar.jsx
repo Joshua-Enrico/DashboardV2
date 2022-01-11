@@ -1,19 +1,24 @@
 // Styles clases for this component
 import { ThemeProvider } from 'styled-components';
-import { MainContainer, TopBar, Logo, Image, H2, Span, Close,
-         SideBarNav, Link, H3, Section, Pages, Page, RoutContainer,
-          Nmessage } from "./Style";
+import {
+    MainContainer, TopBar, Logo, Image, H2, Span, Close,
+    SideBarNav, LinkPage, H3, Section, Pages, Page, RoutContainer,
+    Nmessage
+} from "./Style";
 //icons
 import { MdClose, MdSpaceDashboard } from 'react-icons/md';
 import { BsCircle, BsPeopleFill } from 'react-icons/bs';
 import { BiStats } from 'react-icons/bi';
-import { AiOutlineMail } from 'react-icons/ai';
+import { AiOutlineMail, AiOutlineSetting } from 'react-icons/ai';
 import { HiOutlineLogout } from 'react-icons/hi';
 
 import { useClickAway } from 'react-use';
 
 import { useSelector } from 'react-redux';
 import { useRef } from 'react';
+
+// nextjs link
+import Link from 'next/link'
 
 
 const SideBar = () => {
@@ -31,11 +36,11 @@ const SideBar = () => {
 
         const element = document.getElementById(id);
         element.classList.remove("active");
-        
+
     }
 
     return (
-        <ThemeProvider  theme={theme}>
+        <ThemeProvider theme={theme}>
             <MainContainer id="SideBar">
                 <TopBar>
                     <Logo>
@@ -43,27 +48,29 @@ const SideBar = () => {
                         <H2>SIM<Span>PLE</Span></H2>
                     </Logo>
                     <Close>
-                        <MdClose onClick={(e) => Toggle(e, "SideBar")}/>
+                        <MdClose onClick={(e) => Toggle(e, "SideBar")} />
                     </Close>
                 </TopBar>
                 <SideBarNav ref={ref}>
                     <RoutContainer>
-                        <Section className="active">
-                            <MdSpaceDashboard />
-                            <H3>Dashboard</H3>
-                        </Section>
+                        <Link href="/" >
+                            <Section className="active">
+                                <MdSpaceDashboard />
+                                <H3>Dashboard</H3>
+                            </Section>
+                        </Link>
                         <Pages>
                             <Page>
                                 <BsCircle />
-                                <Link>Home</Link>
+                                <LinkPage>Home</LinkPage>
                             </Page>
                             <Page>
                                 <BsCircle />
-                                <Link>Analytics</Link>
+                                <LinkPage>Analytics</LinkPage>
                             </Page>
                             <Page>
                                 <BsCircle />
-                                <Link>Sales</Link>
+                                <LinkPage>Sales</LinkPage>
                             </Page>
                         </Pages>
                     </RoutContainer>
@@ -75,19 +82,19 @@ const SideBar = () => {
                         <Pages>
                             <Page>
                                 <BsCircle />
-                                <Link>Users</Link>
+                                <LinkPage>Users</LinkPage>
                             </Page>
                             <Page>
                                 <BsCircle />
-                                <Link>Products</Link>
+                                <LinkPage>Products</LinkPage>
                             </Page>
                             <Page>
                                 <BsCircle />
-                                <Link>Transactions</Link>
+                                <LinkPage>Transactions</LinkPage>
                             </Page>
                             <Page>
                                 <BsCircle />
-                                <Link>Reports</Link>
+                                <LinkPage>Reports</LinkPage>
                             </Page>
                         </Pages>
                     </RoutContainer>
@@ -100,15 +107,15 @@ const SideBar = () => {
                         <Pages>
                             <Page>
                                 <BsCircle />
-                                <Link>Mail</Link>
+                                <LinkPage>Mail</LinkPage>
                             </Page>
                             <Page>
                                 <BsCircle />
-                                <Link>Feedback</Link>
+                                <LinkPage>Feedback</LinkPage>
                             </Page>
                             <Page>
                                 <BsCircle />
-                                <Link>Messages</Link>
+                                <LinkPage>Messages</LinkPage>
                             </Page>
                         </Pages>
                     </RoutContainer>
@@ -120,17 +127,26 @@ const SideBar = () => {
                         <Pages>
                             <Page>
                                 <BsCircle />
-                                <Link>Manage</Link>
+                                <LinkPage>Manage</LinkPage>
                             </Page>
                             <Page>
                                 <BsCircle />
-                                <Link>Analytics</Link>
+                                <LinkPage>Analytics</LinkPage>
                             </Page>
                             <Page>
                                 <BsCircle />
-                                <Link>Reports</Link>
+                                <LinkPage>Reports</LinkPage>
                             </Page>
                         </Pages>
+                    </RoutContainer>
+                    <RoutContainer>
+                        <Link href="/settings" >
+                        <Section >
+                                <AiOutlineSetting />
+                                <H3>Settings</H3>
+                        
+                        </Section>
+                        </Link>
                     </RoutContainer>
                     <RoutContainer>
                         <Section >
