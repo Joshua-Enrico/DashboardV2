@@ -1,14 +1,30 @@
 import styled from 'styled-components';
+import { Mobile, Tablet } from '../../styles/Resposive';
 
 
 
 
 const MainContainer = styled.aside`
     height: 100vh;
+    transition: all 0.3s ease-in-out;
 
+    ${Mobile({
+        display: 'none',
+        position: 'fixed',
+        left: '0',
+        background: props => props.theme.Cwhite,
+        width: '18rem',
+        zIndex: '3',
+        boxShadow:  '1rem 3rem 4rem rgba(132, 139, 200, 0.18)',
+        height: '100vh',
+        paddingRight: props => props.theme.Padding,
+    })}
+    &.active {
+        display: block;
+    }
 `;
 
- const TopBar = styled.div`
+const TopBar = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -16,9 +32,14 @@ const MainContainer = styled.aside`
     margin-top: 1.4rem;
 `;
 
- const Logo = styled.div`
+const Logo = styled.div`
     display: flex;
     gap: 0.8rem;
+
+    ${Mobile({
+        marginLeft: '1rem',
+    })}
+
 `;
 
 const Image = styled.img`
@@ -27,6 +48,13 @@ const Image = styled.img`
 `;
 
 const H2 = styled.h2`
+    ${Tablet({
+        display: 'none',
+    })}
+    ${Mobile({
+        display: 'inline',
+    })}
+
 `;
 
 const Span = styled.span`
@@ -34,12 +62,22 @@ const Span = styled.span`
 
 `;
 const Close = styled.div`
+    & > svg {
+        display: none;
+        font-size: 1.4rem;
+        ${Mobile({
+            display: 'inline-block',
+            cursor: 'pointer',
+        })}
+    }
+
 `;
 
 const SideBarNav = styled.div`
     background: white;
     display: flex;
     flex-direction: column;
+    background: transparent;
     height: 87vh;
     position: relative;
     top: 3rem;
@@ -49,7 +87,16 @@ const SideBarNav = styled.div`
             position: absolute;
             bottom: 3rem;
             width: 100%;
+            ${Tablet({
+                position: 'relative',
+                marginTop: '3rem',
+            })}
+            ${Mobile({
+                position: 'absolute',
+                bottom: '5rem',
+            })}
         }
+
     }
 `;
 
@@ -86,6 +133,15 @@ const Section = styled.div`
         background: ${props => props.theme.Cprimary};
     }
 
+    ${Tablet({
+        width: '6.5rem',
+    })}
+    ${Mobile({
+        width: '100%',
+        height: '3.4rem',
+    })}
+    
+
     transition: all 300ms ease;
     & > svg {
         font-size: 1.6rem;
@@ -112,6 +168,12 @@ const Link = styled.span`
 
 const H3 = styled.h3`
     font-weight: 500;
+    ${Tablet({
+        display: 'none',
+    })}
+    ${Mobile({
+        display: 'inline',
+    })}
 `;
 
 const Nmessage = styled.span`

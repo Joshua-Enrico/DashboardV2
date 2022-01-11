@@ -6,6 +6,7 @@ const ItemDiv = styled.div`
     align-items: center;
     gap: 1rem;
     margin-bottom: 0.7rem;
+    cursor: pointer;
     padding: 1.4rem ${props => props.theme.CardPadding};
     border-radius: ${props => props.theme.BorderRadius3};
     box-shadow: ${props => props.theme.BoxShadow};

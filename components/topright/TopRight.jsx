@@ -8,10 +8,18 @@ import { BiSun, BiMoon } from 'react-icons/bi'
 
 
 const TopRight = () => {
+
+    const Toggle = (e, id) => {
+
+        const element = document.getElementById(id);
+        element.classList.add("active");
+        
+    }
+
     return (
         <TopRightContainer>
             <Button>
-                <CgMenu />
+                <CgMenu onClick={(e) => Toggle(e, "SideBar")}/>
             </Button>
             <ThemeToggle>
                 <BiSun className="active"/>

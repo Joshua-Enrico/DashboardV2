@@ -20,18 +20,23 @@ const SideBar = () => {
     const theme = useSelector((state) => state.theme.theme)
     const dispatch = useDispatch()
 
+    const Toggle = (e, id) => {
 
+        const element = document.getElementById(id);
+        element.classList.remove("active");
+        
+    }
 
     return (
         <ThemeProvider theme={theme}>
-            <MainContainer>
+            <MainContainer id="SideBar">
                 <TopBar>
                     <Logo onClick={() => dispatch(SwitchTheme())}>
                         <Image src="dashboard.png" alt="" />
                         <H2>SIM<Span>PLE</Span></H2>
                     </Logo>
                     <Close>
-                        <MdClose />
+                        <MdClose onClick={(e) => Toggle(e, "SideBar")}/>
                     </Close>
                 </TopBar>
                 <SideBarNav>

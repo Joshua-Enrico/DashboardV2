@@ -1,7 +1,21 @@
 import styled from 'styled-components';
+import { Mobile, Tablet } from '../../styles/Resposive';
 
 const RecentOrdersContainer = styled.div`
     margin-top: 2rem;
+
+    ${Tablet({
+        width: '94%',
+        position: 'absolute',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        margin: '2rem 0 0 8rem',
+    })}
+    ${Mobile({
+        position: 'relative',
+        margin: "3rem 0 0 0",
+        width: '100%',
+    })}
 `
 
 const Title = styled.h2`
@@ -16,6 +30,14 @@ const Table = styled.table`
     text-align: center;
     box-shadow: ${props => props.theme.BoxShadow};
     transform: all 300ms ease;
+
+    ${Tablet({
+        width: '82vw',
+    })}
+    ${Mobile({
+        width: '100%',
+        margin: '0',
+    })}
 
     &:hover {
         box-shadow: none;

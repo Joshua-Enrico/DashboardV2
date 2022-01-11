@@ -1,5 +1,15 @@
 import styled from 'styled-components';
+import  {Mobile, Tablet} from './Resposive';
 
+
+import { createGlobalStyle } from 'styled-components'
+
+export const GlobalStyle = createGlobalStyle`
+  body {
+   background-color: ${props => props.theme.Cbackground};
+
+}
+`
 
 export const MainContainer = styled.div`
 
@@ -9,6 +19,15 @@ export const MainContainer = styled.div`
     gap: 1.8rem;
     grid-template-columns: 14rem auto 23rem;
     color: ${props => props.theme.Cdark};
+    ${Tablet({
+        width: '94%',
+        gridTemplateColumns: '7rem auto 23rem',
+    })}
+    ${Mobile({
+        width: '100%',
+        gridTemplateColumns: '1fr',
+    })}
+
     
     .text-muted {
         color: ${props => props.theme.CinfoDark};
@@ -43,11 +62,19 @@ export const MainContainer = styled.div`
 export const Main = styled.main`
 
     margin-top: 1.4rem;
+    ${Mobile({
+        marginTop: '8rem',
+        padding: '0 1rem',
+    })}
 
 `
 
 export const RightSide = styled.div`
     margin-top: 1.4rem;
+    ${Mobile({
+        width: '94%',
+        margin: "0 auto 4rem",
+    })}
     
 `
 
