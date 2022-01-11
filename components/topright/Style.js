@@ -112,11 +112,77 @@ const UserPhoto = styled.div`
 const Photo = styled.img`
     width: 3.6rem;
     margin-top: -5px;
+    cursor: pointer;
+`;
+
+
+//dropdown
+
+const DropDownContainer = styled.div`
+    display: none;
+    position: absolute;
+    width: 8rem;
+    margin-top: 4rem;
+    right: 1rem;
+    padding: 10px;
+    background: ${props => props.theme.Cwhite};
+    border-radius: ${props => props.theme.BorderRadius1};
+
+    &.active {
+        display: block;
+    }
+
+    box-shadow: 0 1rem 1rem rgba(132, 139, 200, 0.18);
+    &:hover {
+        box-shadow: none;
+    }
+
+    ${Mobile({
+        marginTop: '5rem',
+        width: '10rem',
+    })}
+
+`;
+
+
+const DropDown = styled.ul`
+    display: flex;
+    flex-direction: column;
+    align-items: right;
+    justify-content: center;
+    padding: 1rem 0rem;
+
+    border-radius: ${props => props.theme.BorderRadius1};
+    background: ${props => props.theme.Cwhite};
+    width: 7rem;
+    height: auto;
+    top: 4rem;
+
+`;
+
+const Items = styled.li`
+    style: none;
+    display: flex;
+    list-style-type: none;
+    justify-content: left;
+    align-items: center;
+    right: 0;
+    padding: 0.5rem;
+    margin-right: 0;
+    cursor: pointer;
+
+    & > svg {
+        margin-right: 0.5rem;
+    }
+    border-radius: ${props => props.theme.BorderRadius1};
+    &:hover {
+        background: ${props => props.theme.Cprimary};
+        scale: (1.1, 1.1);
+        color: white;
+    }
 `;
 
 
 
-
-
-export { TopRightContainer, Button, ThemeToggle, Profile, Info, P, B, Small, UserPhoto, Photo };
+export { TopRightContainer, Button, ThemeToggle, Profile, Info, P, B, Small, UserPhoto, Photo, DropDown, Items, DropDownContainer };
 

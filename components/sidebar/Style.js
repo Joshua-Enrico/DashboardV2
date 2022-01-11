@@ -6,7 +6,8 @@ import { Mobile, Tablet } from '../../styles/Resposive';
 
 const MainContainer = styled.aside`
     height: 100vh;
-
+    position: fixed;
+    
     ${Mobile({
         display: 'none',
         position: 'fixed',
@@ -32,6 +33,7 @@ const TopBar = styled.div`
     justify-content: space-between;
     margin-bottom: 1.4rem;
     margin-top: 1.4rem;
+    margin-left: 1.4rem;
 `;
 
 const Logo = styled.div`
@@ -50,6 +52,7 @@ const Image = styled.img`
 `;
 
 const H2 = styled.h2`
+    color: ${props => props.theme.Cdark};
     ${Tablet({
         display: 'none',
     })}
@@ -83,6 +86,7 @@ const SideBarNav = styled.div`
     height: 87vh;
     position: relative;
     top: 3rem;
+    margin-left: 1.4rem;
 
     & > div:last-child {
         & > div {
@@ -186,7 +190,6 @@ const Nmessage = styled.span`
     font-size: 11px;
     border-radius: ${props => props.theme.BorderRadius1};
 `
-
 
 
 

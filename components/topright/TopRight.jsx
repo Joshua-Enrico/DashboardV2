@@ -1,10 +1,16 @@
-import { TopRightContainer, Button, ThemeToggle,
-        Profile, Info, P, B, Small, UserPhoto ,Photo } from "./Style"
+import {
+    TopRightContainer, Button, ThemeToggle,
+    Profile, Info, P, B, Small, UserPhoto, Photo, DropDown, Items, DropDownContainer
+} from "./Style"
 import { CgMenu } from 'react-icons/cg'
 import { BiSun, BiMoon } from 'react-icons/bi'
 import { SwitchTheme } from '../../redux/ThemeRedux';
 import { useDispatch, useSelector } from "react-redux";
-
+import { HiOutlineLogout } from 'react-icons/hi';
+import { AiOutlineSetting } from 'react-icons/ai';
+import { GiSettingsKnobs } from 'react-icons/gi';
+import { useRef } from "react";
+import { useClickAway } from 'react-use';
 
 
 
@@ -16,27 +22,64 @@ const TopRight = () => {
 
         const element = document.getElementById(id);
         element.classList.add("active");
-        
+
     };
+
+    // handle dropdown
+    let active = false;
+    const DropDownTgl = (e, id) => {
+            const element = document.getElementById(id);
+        if (active) {
+            element.classList.remove("active");
+            active = false;
+        } else {
+            element.classList.add("active");
+            active = true;
+        }
+
+    }
+    // handle click outside of down menu
+    const ref = useRef(null);
+    useClickAway(ref, () => {
+        const element = document.getElementById("DropCt");
+        element.classList.remove("active");
+        active = false;
+    });
 
     return (
         <TopRightContainer>
             <Button>
-                <CgMenu onClick={(e) => Toggle(e, "SideBar")}/>
+                <CgMenu onClick={(e) => Toggle(e, "SideBar")} />
             </Button>
             <ThemeToggle onClick={() => dispatch(SwitchTheme())}>
-                {thememode === "light" ? <BiSun className="active"/> : <BiSun/>}
-                {thememode === "dark" ? <BiMoon className="active"/> : <BiMoon/>}
+                {thememode === "light" ? <BiSun className="active" /> : <BiSun />}
+                {thememode === "dark" ? <BiMoon className="active" /> : <BiMoon />}
 
             </ThemeToggle>
-            <Profile>
+            <Profile ref={ref}>
                 <Info>
                     <P>He, <B>Joshua</B></P>
                     <Small>Admin</Small>
                 </Info>
-                <UserPhoto>
+                <UserPhoto onClick={(e) => DropDownTgl(e, "DropCt")}>
                     <Photo src="ProfileImg.png" />
                 </UserPhoto>
+                <DropDownContainer ref={ref} id="DropCt">
+                <DropDown>
+                    <Items>
+                        <GiSettingsKnobs/>
+                        Theme
+                    </Items>
+                    <Items>
+                        <AiOutlineSetting/>
+                        Setting
+                    </Items>
+                    <Items>
+                        <HiOutlineLogout />
+                        Logout
+                    </Items>
+                </DropDown>
+            </DropDownContainer>
             </Profile>
         </TopRightContainer>
     )

@@ -79,7 +79,8 @@ export const RightSide = styled.div`
 `
 
 export const Title = styled.h1`
-
     color: ${props => props.theme.Cdark};
-    
+    ${Mobile({
+        marginTop: '-3.5rem',
+    })}
 `

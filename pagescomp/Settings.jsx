@@ -14,7 +14,7 @@ import SalesAnalytics from '../components/salesAnalytics/SalesAnalytics'
 
 
 
-const Homepage = () => {
+const Settings = () => {
 
   const theme = useSelector((state) => state.theme.theme)
 
@@ -50,4 +50,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage
+export default Settings
