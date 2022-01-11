@@ -6,21 +6,23 @@ import { Mobile, Tablet } from '../../styles/Resposive';
 
 const MainContainer = styled.aside`
     height: 100vh;
-    transition: all 0.3s ease-in-out;
 
     ${Mobile({
         display: 'none',
         position: 'fixed',
-        left: '0',
+        left: '-100%',
         background: props => props.theme.Cwhite,
         width: '18rem',
         zIndex: '3',
         boxShadow:  '1rem 3rem 4rem rgba(132, 139, 200, 0.18)',
         height: '100vh',
         paddingRight: props => props.theme.Padding,
+        animation: 'ShowMenu 0.3s ease forwards',
+    
     })}
     &.active {
         display: block;
+        
     }
 `;
 
