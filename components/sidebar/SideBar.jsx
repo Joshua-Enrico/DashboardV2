@@ -10,15 +10,22 @@ import { BiStats } from 'react-icons/bi';
 import { AiOutlineMail } from 'react-icons/ai';
 import { HiOutlineLogout } from 'react-icons/hi';
 
-// handle theme with redux
-import { useSelector, useDispatch } from 'react-redux';
-import { lightTheme, darkTheme } from '../../styles/Theme';
-import { SwitchTheme } from '../../redux/ThemeRedux';
+import { useClickAway } from 'react-use';
+
+import { useSelector } from 'react-redux';
+import { useRef } from 'react';
 
 
 const SideBar = () => {
+
+    // handle click outside of the sidebar
+    const ref = useRef(null);
+    useClickAway(ref, () => {
+        const element = document.getElementById("SideBar");
+        element.classList.remove("active");
+    });
+
     const theme = useSelector((state) => state.theme.theme)
-    const dispatch = useDispatch()
 
     const Toggle = (e, id) => {
 
@@ -28,10 +35,10 @@ const SideBar = () => {
     }
 
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider  theme={theme}>
             <MainContainer id="SideBar">
                 <TopBar>
-                    <Logo onClick={() => dispatch(SwitchTheme())}>
+                    <Logo>
                         <Image src="dashboard.png" alt="" />
                         <H2>SIM<Span>PLE</Span></H2>
                     </Logo>
@@ -39,7 +46,7 @@ const SideBar = () => {
                         <MdClose onClick={(e) => Toggle(e, "SideBar")}/>
                     </Close>
                 </TopBar>
-                <SideBarNav>
+                <SideBarNav ref={ref}>
                     <RoutContainer>
                         <Section className="active">
                             <MdSpaceDashboard />

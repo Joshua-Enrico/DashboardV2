@@ -170,6 +170,7 @@ const Link = styled.span`
 
 const H3 = styled.h3`
     font-weight: 500;
+    color: ${props => props.theme.CinfoDark};
     ${Tablet({
         display: 'none',
     })}

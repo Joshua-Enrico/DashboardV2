@@ -60,10 +60,11 @@ const ThemeToggle = styled.div`
         display: flex;
         align-items: center;
         justify-content: center;
+        color: #7d8da1;
 
         &.active {
             background-color: ${props => props.theme.Cprimary};
-            color: ${props => props.theme.Cwhite};
+            color: white;
             border-radius: ${props => props.theme.BorderRadius1};
         }
     }
