@@ -1,28 +1,43 @@
 // Styles clases for this component
 import { ThemeProvider } from 'styled-components';
+
+
 import {
     MainContainer, TopBar, Logo, Image, H2, Span, Close,
     SideBarNav, LinkPage, H3, Section, Pages, Page, RoutContainer,
     Nmessage
 } from "./Style";
 //icons
-import { MdClose, MdSpaceDashboard } from 'react-icons/md';
+import { MdClose, MdSpaceDashboard, MdOutlineAttachMoney, MdOutlineAnalytics, MdManageAccounts } from 'react-icons/md';
 import { BsCircle, BsPeopleFill } from 'react-icons/bs';
 import { BiStats } from 'react-icons/bi';
 import { AiOutlineMail, AiOutlineSetting } from 'react-icons/ai';
-import { HiOutlineLogout } from 'react-icons/hi';
+import { HiOutlineLogout, HiDocumentReport } from 'react-icons/hi';
+import { RiUserSettingsFill, RiSecurePaymentFill } from 'react-icons/ri';
+import { BsShop } from 'react-icons/bs';
+import { GoReport } from 'react-icons/go';
+import { FiHome } from 'react-icons/fi';
+import { FaMailBulk } from 'react-icons/fa';
+import { VscFeedback } from 'react-icons/vsc';
+import { SiGooglechat, SiGoogleanalytics } from 'react-icons/si';
 
+//
+
+// importing reducers
+import {handleActive, RemoveId } from "../../redux/HandleRedux"
+
+
+//handle click outside of the sidebar
 import { useClickAway } from 'react-use';
-
-import { useSelector } from 'react-redux';
-import { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRef, useState } from 'react';
 
 // nextjs link
 import Link from 'next/link'
 
 
 const SideBar = () => {
-
+    const dispatch = useDispatch();
     // handle click outside of the sidebar
     const ref = useRef(null);
     useClickAway(ref, () => {
@@ -39,6 +54,44 @@ const SideBar = () => {
 
     }
 
+
+    // handle active pages container
+
+    const idList = useSelector((state) => state.handleactive.idList);
+    console.log(idList)
+
+    
+    const HandleActive = (e, id) => {
+        console.log(idList)
+        const dictl = Object?.keys(idList).length
+        console.log(dictl)
+            const element = document.getElementById(id);
+        if (element.classList.contains("active")) {
+            console.log("active")
+            const element = document.getElementById(id);
+            element.classList.remove("active");
+            dispatch(RemoveId(id))
+        } else {
+            if (idList !== {} && dictl > 1) {
+                let key;
+                for (let k in idList) {
+                    key = k;
+                    break
+                }
+                const prev = document.getElementById(key);
+                prev.classList.remove("active");
+                dispatch(RemoveId(key))
+            }
+            const element1 = document.getElementById(id);
+            element1.classList.add("active");
+            dispatch(handleActive(id))
+
+
+        }
+
+    }
+
+
     return (
         <ThemeProvider theme={theme}>
             <MainContainer id="SideBar">
@@ -53,88 +106,87 @@ const SideBar = () => {
                 </TopBar>
                 <SideBarNav ref={ref}>
                     <RoutContainer>
-                        <Link href="/" >
-                            <Section className="active">
+                            <Section onClick={(e) => HandleActive(e, "Dashboard")}>
                                 <MdSpaceDashboard />
                                 <H3>Dashboard</H3>
                             </Section>
-                        </Link>
-                        <Pages>
+
+                        <Pages id="Dashboard">
                             <Page>
-                                <BsCircle />
+                                <FiHome />
                                 <LinkPage>Home</LinkPage>
                             </Page>
                             <Page>
-                                <BsCircle />
+                                <MdOutlineAnalytics />
                                 <LinkPage>Analytics</LinkPage>
                             </Page>
                             <Page>
-                                <BsCircle />
+                                <MdOutlineAttachMoney />
                                 <LinkPage>Sales</LinkPage>
                             </Page>
                         </Pages>
                     </RoutContainer>
                     <RoutContainer>
-                        <Section >
+                        <Section onClick={(e) => HandleActive(e, "Quick")}>
                             <BiStats />
                             <H3>Quick Menu</H3>
                         </Section>
-                        <Pages>
+                        <Pages id="Quick">
                             <Page>
-                                <BsCircle />
+                                <RiUserSettingsFill />
                                 <LinkPage>Users</LinkPage>
                             </Page>
                             <Page>
-                                <BsCircle />
+                                <BsShop />
                                 <LinkPage>Products</LinkPage>
                             </Page>
                             <Page>
-                                <BsCircle />
+                                <RiSecurePaymentFill />
                                 <LinkPage>Transactions</LinkPage>
                             </Page>
                             <Page>
-                                <BsCircle />
+                                <HiDocumentReport />
                                 <LinkPage>Reports</LinkPage>
                             </Page>
                         </Pages>
                     </RoutContainer>
                     <RoutContainer>
-                        <Section >
-                            <AiOutlineMail />
+                        <Section onClick={(e) => HandleActive(e, "Notifications")}>
+                            <FaMailBulk />
                             <H3>Notifications</H3>
                             <Nmessage>3</Nmessage>
                         </Section>
-                        <Pages>
+                        <Pages id="Notifications">
                             <Page>
-                                <BsCircle />
+                                <AiOutlineMail/>
                                 <LinkPage>Mail</LinkPage>
                             </Page>
                             <Page>
-                                <BsCircle />
+                                <VscFeedback />
                                 <LinkPage>Feedback</LinkPage>
                             </Page>
                             <Page>
-                                <BsCircle />
+                                <SiGooglechat />
                                 <LinkPage>Messages</LinkPage>
                             </Page>
                         </Pages>
                     </RoutContainer>
                     <RoutContainer>
-                        <Section >
+                        <Section onClick={(e) => HandleActive(e, "Staff")}>
                             <BsPeopleFill />
                             <H3>Staff</H3>
                         </Section>
-                        <Pages>
+                        <Pages id="Staff">
                             <Page>
-                                <BsCircle />
+                                <MdManageAccounts />
                                 <LinkPage>Manage</LinkPage>
                             </Page>
                             <Page>
-                                <BsCircle />
+                                <SiGoogleanalytics />
                                 <LinkPage>Analytics</LinkPage>
                             </Page>
                             <Page>
-                                <BsCircle />
+                                <GoReport />
                                 <LinkPage>Reports</LinkPage>
                             </Page>
                         </Pages>
@@ -144,7 +196,6 @@ const SideBar = () => {
                         <Section >
                                 <AiOutlineSetting />
                                 <H3>Settings</H3>
-                        
                         </Section>
                         </Link>
                     </RoutContainer>

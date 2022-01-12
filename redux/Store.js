@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit"
 
 import userReducer from "./userRedux"
 import themeReducer from "./ThemeRedux"
+import activeReducer from "./HandleRedux"
 import {
     persistStore,
     persistReducer,
@@ -22,6 +23,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
     user: userReducer,
     theme: themeReducer,
+    handleactive: activeReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

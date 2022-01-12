@@ -7,6 +7,22 @@ import { Mobile, Tablet } from '../../styles/Resposive';
 const MainContainer = styled.aside`
     height: 100vh;
     position: fixed;
+    &:hover{
+        overflow-x: hidden;
+        &::-webkit-scrollbar{
+            width: 3px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;        /* color of the tracking area */
+          }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: ${props => props.theme.Cprimary };    /* color of the scroll thumb */
+            border-radius: 10px;       /* roundness of the scroll thumb */
+            border: 1px solid ${props => props.theme.Cprimary };  /* creates padding around scroll thumb */
+        }
+    }
     
     ${Mobile({
         display: 'none',
@@ -87,6 +103,7 @@ const SideBarNav = styled.div`
     position: relative;
     top: 3rem;
     margin-left: 1.4rem;
+    margin-right: 0.5rem;
 
     & > div:last-child {
         & > div {
@@ -116,6 +133,7 @@ const Section = styled.div`
     margin-left: 2rem;
     gap: 1rem;
     align-items: center;
+    border-radius: 0.8rem;
     position: relative;
     height: 3.7rem;
     cursor: pointer;
@@ -154,7 +172,7 @@ const Section = styled.div`
     }
 
     &:hover {
-        color: ${props => props.theme.Cprimary};
+       
         & > svg {
             margin-left: calc(2rem - 20px);
         }
@@ -163,13 +181,62 @@ const Section = styled.div`
 
 const Pages = styled.div`
     display: none;
+    flex-direction: column;
+    margin-left: 2.5rem;
+    margin-top: 10px;
+    gap: 1rem;
+    color: ${props => props.theme.CinfoDark};
+    transition: all 300ms ease;
+
+    &.active {
+        display: flex;
+    }
+
+    & > div {
+        &:hover {
+            & > svg {
+                margin-left: 1.8rem;
+            }
+        }
+
+    }
+
+    
 `;
 const Page = styled.div`
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 1.5rem;
+    border-radius: 0 0.8rem 0.8rem 0;
+    transition: all 300ms ease;
+    & > svg {
+        transition: all 300ms ease;
+        font-size: 1rem;
+        margin-left: 1.5rem;
+        margin-right: 1rem;
+    }
+
+    &.active {
+        background: ${props => props.theme.Clight};
+        color: ${props => props.theme.Cprimary};
+        margin-left: 0;
+        & > svg {
+            margin-left: 1.5rem;
+        }
+        
+    }
+    &.active:before {
+        content: '';
+        width: 0.3rem;
+        height: 100%;
+        background: ${props => props.theme.Cprimary};
+    }
+
 `;
 
 
 const LinkPage = styled.span`
-    color: ${props => props.theme.Cdark};
 `;
 
 const H3 = styled.h3`
