@@ -3,10 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const activeSlice = createSlice({
     name: "handleActive",
     initialState: {
-        idList: {},
+        idList: undefined,
     },
     reducers: {
         handleActive: (state, id) => {
+            if (state.idList === undefined) {
+                state.idList = {};
+            }
             state.idList[id.payload] = id.payload;
         },
 

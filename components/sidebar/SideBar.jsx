@@ -24,13 +24,13 @@ import { SiGooglechat, SiGoogleanalytics } from 'react-icons/si';
 //
 
 // importing reducers
-import {handleActive, RemoveId } from "../../redux/HandleRedux"
+import { handleActive, RemoveId } from "../../redux/HandleRedux"
 
 
 //handle click outside of the sidebar
 import { useClickAway } from 'react-use';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // nextjs link
 import Link from 'next/link'
@@ -58,22 +58,30 @@ const SideBar = () => {
     // handle active pages container
 
     const idList = useSelector((state) => state.handleactive.idList);
-    console.log(idList)
 
-    
+    useEffect(() => {
+        if (idList != {} && idList != undefined) {
+            let key;
+            for (key in idList) {
+                let element = document.getElementById(key);
+                element.classList.add("active");
+            }
+        }
+    }, []);
+
     const HandleActive = (e, id) => {
-        console.log(idList)
-        const dictl = Object?.keys(idList).length
-        console.log(dictl)
-            const element = document.getElementById(id);
+
+        const dictl = Object.keys(idList).length
+        const element = document.getElementById(id);
         if (element.classList.contains("active")) {
-            console.log("active")
+
             const element = document.getElementById(id);
             element.classList.remove("active");
             dispatch(RemoveId(id))
         } else {
-            if (idList !== {} && dictl > 1) {
+            if ((idList != {} && idList != undefined) && dictl > 1) {
                 let key;
+
                 for (let k in idList) {
                     key = k;
                     break
@@ -106,10 +114,10 @@ const SideBar = () => {
                 </TopBar>
                 <SideBarNav ref={ref}>
                     <RoutContainer>
-                            <Section onClick={(e) => HandleActive(e, "Dashboard")}>
-                                <MdSpaceDashboard />
-                                <H3>Dashboard</H3>
-                            </Section>
+                        <Section onClick={(e) => HandleActive(e, "Dashboard")}>
+                            <MdSpaceDashboard />
+                            <H3>Dashboard</H3>
+                        </Section>
 
                         <Pages id="Dashboard">
                             <Page>
@@ -158,7 +166,7 @@ const SideBar = () => {
                         </Section>
                         <Pages id="Notifications">
                             <Page>
-                                <AiOutlineMail/>
+                                <AiOutlineMail />
                                 <LinkPage>Mail</LinkPage>
                             </Page>
                             <Page>
@@ -193,10 +201,10 @@ const SideBar = () => {
                     </RoutContainer>
                     <RoutContainer>
                         <Link href="/settings" >
-                        <Section >
+                            <Section >
                                 <AiOutlineSetting />
                                 <H3>Settings</H3>
-                        </Section>
+                            </Section>
                         </Link>
                     </RoutContainer>
                     <RoutContainer>

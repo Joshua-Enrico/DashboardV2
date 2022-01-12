@@ -9,7 +9,7 @@ import RecentOrds from '../components/recentOrders/RecentOrds'
 import TopRight from '../components/topright/TopRight'
 import RecentUpdates from '../components/recentUpdates/RecentUpdates'
 import SalesAnalytics from '../components/salesAnalytics/SalesAnalytics'
-
+import { useState } from 'react'
 
 
 
@@ -17,7 +17,6 @@ import SalesAnalytics from '../components/salesAnalytics/SalesAnalytics'
 const Homepage = () => {
 
   const theme = useSelector((state) => state.theme.theme)
-
 
   return (
     <ThemeProvider theme={theme}>
