@@ -11,15 +11,18 @@ import { AiOutlineSetting } from 'react-icons/ai';
 import { GiSettingsKnobs } from 'react-icons/gi';
 import { useRef } from "react";
 import { useClickAway } from 'react-use';
-
+import { useRouter } from 'next/router';
+import { Logout } from "../../utils/auth"
 // nextjs link
 import Link from 'next/link'
 
 
 const TopRight = () => {
     const dispatch = useDispatch();
+    const router = useRouter();
+
     const thememode = useSelector((state) => state.theme.theme.mode);
-    console.log(thememode)
+    const user =  useSelector((state) => state.user.currentUser);
     const Toggle = (e, id) => {
 
         const element = document.getElementById(id);
@@ -60,8 +63,8 @@ const TopRight = () => {
             </ThemeToggle>
             <Profile ref={ref}>
                 <Info>
-                    <P>He, <B>Joshua</B></P>
-                    <Small>Admin</Small>
+                    <P>He, {user?.firstName}<B></B></P>
+                    <Small>{user?.role}</Small>
                 </Info>
                 <UserPhoto onClick={(e) => DropDownTgl(e, "DropCt")}>
                     <Photo src="ProfileImg.png" />
@@ -78,7 +81,7 @@ const TopRight = () => {
                             Setting
                         </Items>
                         </Link>
-                            <Items>
+                            <Items onClick={() => Logout(dispatch, router)}>
                                 <HiOutlineLogout />
                                 Logout
                             </Items>

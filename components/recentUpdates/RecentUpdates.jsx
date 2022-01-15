@@ -3,7 +3,6 @@ import { RecentUpdatesContainer, Title, Updates} from "./Style"
 import { Data } from "./Data"
 
 const RecentUpdates = () => {
-    console.log(Data)
     return (
         <RecentUpdatesContainer>
             <Title>Recent Updates</Title>

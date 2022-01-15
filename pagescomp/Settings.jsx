@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SideBar from '../components/sidebar/SideBar'
 import Insights from '../components/insights/Insights'
 import { Main, MainContainer, Title, RightSide, GlobalStyle } from '../styles/Style'
@@ -9,17 +9,43 @@ import RecentOrds from '../components/recentOrders/RecentOrds'
 import TopRight from '../components/topright/TopRight'
 import RecentUpdates from '../components/recentUpdates/RecentUpdates'
 import SalesAnalytics from '../components/salesAnalytics/SalesAnalytics'
+import { useEffect } from 'react'
+import { SafeActiveId, SafeSectId } from '../redux/HandleRedux'
+import { useRouter } from 'next/router'
+import { VerifiSession } from '../utils/auth'
 
 
 
 
 
 const Settings = () => {
+  const dispatch = useDispatch();
+
+  const router = useRouter();
+  VerifiSession(router)
 
   const theme = useSelector((state) => state.theme.theme)
+  const SectId = useSelector((state) => state.handleactive.SectId);
+  const activeId = useSelector((state) => state.handleactive.activeId);
 
+
+
+  useEffect(() => {
+    if (SectId !== undefined && SectId !== "Sect5") {
+      document.getElementById(SectId).classList.remove("active");
+      document.getElementById(activeId).classList.remove('active')
+    }
+    if (activeId !== undefined) {
+      document.getElementById(activeId).classList.remove('active')
+    }
+    document.getElementById("Sect5").classList.add('active')
+    dispatch(SafeSectId("Sect5"))
+    dispatch(SafeActiveId(undefined))
+      
+  }, [])
 
   return (
+    
     <ThemeProvider theme={theme}>
       <div>
         <Head >

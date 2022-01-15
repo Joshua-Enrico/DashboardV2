@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import SideBar from '../components/sidebar/SideBar'
 import Insights from '../components/insights/Insights'
 import { Main, MainContainer, Title, RightSide, GlobalStyle } from '../styles/Style'
@@ -9,14 +9,57 @@ import RecentOrds from '../components/recentOrders/RecentOrds'
 import TopRight from '../components/topright/TopRight'
 import RecentUpdates from '../components/recentUpdates/RecentUpdates'
 import SalesAnalytics from '../components/salesAnalytics/SalesAnalytics'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { SafeActiveId, SafeSectId } from '../redux/HandleRedux'
+import { useRouter } from 'next/router'
+import { VerifiSession } from '../utils/auth'
+// api requests modules 
+
 
 
 
 
 const Homepage = () => {
 
+  const router = useRouter();
+  VerifiSession(router)
+
+
+
+  const dispatch = useDispatch();
+  const SectId = useSelector((state) => state.handleactive.SectId);
+  const activeId = useSelector((state) => state.handleactive.activeId);
+
+
+  // if (user === null) {
+  //   console.log("need to login")
+  //   router.push({
+  //     pathname: "/",
+  //     query: { returnUrl: router.asPath }
+  //   })
+  // } 
+
+  
+
+  useEffect(() => {
+    if (SectId !== undefined && SectId !== "Sect1") {
+      console.log("removing active class")
+      document.getElementById(SectId).classList.remove("active");
+    }
+    if (activeId !== undefined) {
+      document.getElementById(activeId).classList.remove('active')
+    }
+    document.getElementById("Sect1").classList.add('active')
+    document.getElementById("Home").classList.add('active')
+
+    dispatch(SafeSectId("Sect1"))
+    dispatch(SafeActiveId("Home"))
+      
+  }, [])
+
   const theme = useSelector((state) => state.theme.theme)
+  // graphql requests
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -50,3 +93,13 @@ const Homepage = () => {
 }
 
 export default Homepage
+
+// Homepage.getInitialProps = async (context) => {
+   
+
+// }
+
+// export async function getStaticProps() {
+//   // Code will go here
+
+// }

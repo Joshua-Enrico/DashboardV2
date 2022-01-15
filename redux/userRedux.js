@@ -5,13 +5,16 @@ import { lightTheme, darkTheme } from "../styles/Theme";
 const userSlice = createSlice({
     name: "user",
     initialState: {
-        theme: lightTheme
+        currentUser: null,
+        isFetching: false,
+        error: null,
     },
     reducers: {
         loginStart: (state) => {
             state.isFetching = true;
         },
         loginSuccess: (state, action) => {
+            console.log(action)
             state.isFetching = false;
             state.currentUser = action.payload;
             state.error = false;
@@ -22,6 +25,7 @@ const userSlice = createSlice({
         },
         loginOut: (state) => {
             state.currentUser = null;
+            state.isFetching = false;
         }
     },
 });

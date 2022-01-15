@@ -1,11 +1,11 @@
 
-import Homepage from '../pagescomp/home';
+import Index from '../pagescomp/Index/index';
 
 
 export default function Home() {
 
   return (
 
-        <Homepage />
+        <Index />
   )
 }

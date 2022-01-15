@@ -1,12 +1,11 @@
+
 // Styles clases for this component
-import { ThemeProvider } from 'styled-components';
-
-
 import {
     MainContainer, TopBar, Logo, Image, H2, Span, Close,
     SideBarNav, LinkPage, H3, Section, Pages, Page, RoutContainer,
     Nmessage
 } from "./Style";
+
 //icons
 import { MdClose, MdSpaceDashboard, MdOutlineAttachMoney, MdOutlineAnalytics, MdManageAccounts } from 'react-icons/md';
 import { BsCircle, BsPeopleFill } from 'react-icons/bs';
@@ -21,16 +20,14 @@ import { FaMailBulk } from 'react-icons/fa';
 import { VscFeedback } from 'react-icons/vsc';
 import { SiGooglechat, SiGoogleanalytics } from 'react-icons/si';
 
-//
-
 // importing reducers
-import { handleActive, RemoveId } from "../../redux/HandleRedux"
-
+import { ThemeProvider } from 'styled-components';
+import { handleActive, RemoveId, SafeActiveId, SafeSectId } from "../../redux/HandleRedux"
 
 //handle click outside of the sidebar
 import { useClickAway } from 'react-use';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 // nextjs link
 import Link from 'next/link'
@@ -55,10 +52,11 @@ const SideBar = () => {
     }
 
 
-    // handle active pages container
-
+    // handle active pages container vars
     const idList = useSelector((state) => state.handleactive.idList);
-
+    // handle active page vars
+    const SectId = useSelector((state) => state.handleactive.SectId);
+    const activeId = useSelector((state) => state.handleactive.activeId);
     useEffect(() => {
         if (idList != {} && idList != undefined) {
             let key;
@@ -66,20 +64,26 @@ const SideBar = () => {
                 let element = document.getElementById(key);
                 element.classList.add("active");
             }
-        }
+        };
+
+
+
     }, []);
-
+    // handle active pages container func
     const HandleActive = (e, id) => {
-
-        const dictl = Object.keys(idList).length
+        let dictl = false;
+        if (idList !== undefined) {
+            dictl = Object.keys(idList).length
+        }
         const element = document.getElementById(id);
         if (element.classList.contains("active")) {
 
             const element = document.getElementById(id);
             element.classList.remove("active");
             dispatch(RemoveId(id))
+
         } else {
-            if ((idList != {} && idList != undefined) && dictl > 1) {
+            if ((idList != {} && idList != undefined) && (dictl !== false && dictl > 1)) {
                 let key;
 
                 for (let k in idList) {
@@ -99,6 +103,42 @@ const SideBar = () => {
 
     }
 
+    // handle active page func
+    const ActivePage = (e, id, sectionId) => {
+        // if ( activeId !== id && SectId !== undefined) {
+        //     if (sectionId !== SectId) {
+        //         const prevActSect = document.getElementById(SectId); // get previous active section
+        //         prevActSect.classList.remove("active"); // remove active class from previous section
+        //     }
+        //     if (undefined !== activeId) {
+        //     const prevActiveElement = document.getElementById(activeId); // get previos  active element
+        //     prevActiveElement.classList.remove("active"); // remove the active class from the prevActive element
+        //     }
+        // }
+        // // set the new active section
+        // const activeStc = document.getElementById(sectionId);
+        // activeStc.classList.add("active");
+        // dispatch(SafeSectId(sectionId))
+        // // set the new active element
+        // const activeElement = document.getElementById(id); // get the active element
+        // activeElement.classList.add("active"); // add the active class to the active element
+        // dispatch(SafeActiveId(id))
+    }
+    const SpecialLink = (e, sectionId) => {
+        //activeId
+        // if ((sectionId !== SectId &&  SectId !== undefined) && activeId !== undefined) {
+        //     const prevActSect = document.getElementById(SectId) // get previous active section
+        //     prevActSect.classList.remove("active"); // remove active class from previous section
+        //     const prevActiveElement = document.getElementById(activeId)
+        //     prevActiveElement.classList.remove("active") // remove the active class from the prevActive element
+        // }
+        // // set the new active section
+        // const activeStc = document.getElementById(sectionId)
+        // activeStc.classList.add("active")
+        // console.log(sectionId)
+        // dispatch(SafeSectId(sectionId))
+        // dispatch(SafeActiveId(undefined))
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -114,86 +154,88 @@ const SideBar = () => {
                 </TopBar>
                 <SideBarNav ref={ref}>
                     <RoutContainer>
-                        <Section onClick={(e) => HandleActive(e, "Dashboard")}>
+                        <Section id="Sect1" onClick={(e) => HandleActive(e, "Dashboard")}>
                             <MdSpaceDashboard />
                             <H3>Dashboard</H3>
                         </Section>
 
                         <Pages id="Dashboard">
-                            <Page>
+                            <Link href="/home">
+                            <Page id="Home" onClick={(e) => ActivePage(e, "Home", "Sect1")}>
                                 <FiHome />
                                 <LinkPage>Home</LinkPage>
                             </Page>
-                            <Page>
+                            </Link>
+                            <Page id="Analytics" onClick={(e) => ActivePage(e, "Analytics", "Sect1")}>
                                 <MdOutlineAnalytics />
                                 <LinkPage>Analytics</LinkPage>
                             </Page>
-                            <Page>
+                            <Page id="Sales" onClick={(e) => ActivePage(e, "Sales", "Sect1")}>
                                 <MdOutlineAttachMoney />
                                 <LinkPage>Sales</LinkPage>
                             </Page>
                         </Pages>
                     </RoutContainer>
                     <RoutContainer>
-                        <Section onClick={(e) => HandleActive(e, "Quick")}>
+                        <Section id="Sect2" onClick={(e) => HandleActive(e, "Quick")}>
                             <BiStats />
                             <H3>Quick Menu</H3>
                         </Section>
                         <Pages id="Quick">
-                            <Page>
+                            <Page id="Users" onClick={(e) => ActivePage(e, "Users", "Sect2")}>
                                 <RiUserSettingsFill />
                                 <LinkPage>Users</LinkPage>
                             </Page>
-                            <Page>
+                            <Page id="Products" onClick={(e) => ActivePage(e, "Products", "Sect2")}>
                                 <BsShop />
                                 <LinkPage>Products</LinkPage>
                             </Page>
-                            <Page>
+                            <Page id="Transactions" onClick={(e) => ActivePage(e, "Transactions", "Sect2")}>
                                 <RiSecurePaymentFill />
                                 <LinkPage>Transactions</LinkPage>
                             </Page>
-                            <Page>
+                            <Page id="Reports" onClick={(e) => ActivePage(e, "Reports", "Sect2")}>
                                 <HiDocumentReport />
                                 <LinkPage>Reports</LinkPage>
                             </Page>
                         </Pages>
                     </RoutContainer>
                     <RoutContainer>
-                        <Section onClick={(e) => HandleActive(e, "Notifications")}>
+                        <Section id="Sect3" onClick={(e) => HandleActive(e, "Notifications")}>
                             <FaMailBulk />
                             <H3>Notifications</H3>
                             <Nmessage>3</Nmessage>
                         </Section>
                         <Pages id="Notifications">
-                            <Page>
+                            <Page id="Mail" onClick={(e) => ActivePage(e, "Mail", "Sect3")}>
                                 <AiOutlineMail />
                                 <LinkPage>Mail</LinkPage>
                             </Page>
-                            <Page>
+                            <Page id="Feedback" onClick={(e) => ActivePage(e, "Feedback", "Sect3")}>
                                 <VscFeedback />
                                 <LinkPage>Feedback</LinkPage>
                             </Page>
-                            <Page>
+                            <Page id="Messages" onClick={(e) => ActivePage(e, "Messages", "Sect3")}>
                                 <SiGooglechat />
                                 <LinkPage>Messages</LinkPage>
                             </Page>
                         </Pages>
                     </RoutContainer>
                     <RoutContainer>
-                        <Section onClick={(e) => HandleActive(e, "Staff")}>
+                        <Section id="Sect4" onClick={(e) => HandleActive(e, "Staff")}>
                             <BsPeopleFill />
                             <H3>Staff</H3>
                         </Section>
                         <Pages id="Staff">
-                            <Page>
+                            <Page id="Manage" onClick={(e) => ActivePage(e, "Manage", "Sect4")}>
                                 <MdManageAccounts />
                                 <LinkPage>Manage</LinkPage>
                             </Page>
-                            <Page>
+                            <Page id="Anltcs" onClick={(e) => ActivePage(e, "Anltcs", "Sect4")}>
                                 <SiGoogleanalytics />
                                 <LinkPage>Analytics</LinkPage>
                             </Page>
-                            <Page>
+                            <Page id="Rep" onClick={(e) => ActivePage(e, "Rep", "Sect4")}>
                                 <GoReport />
                                 <LinkPage>Reports</LinkPage>
                             </Page>
@@ -201,7 +243,7 @@ const SideBar = () => {
                     </RoutContainer>
                     <RoutContainer>
                         <Link href="/settings" >
-                            <Section >
+                            <Section id="Sect5"  onClick={(e) => SpecialLink(e, "Sect5")}>
                                 <AiOutlineSetting />
                                 <H3>Settings</H3>
                             </Section>

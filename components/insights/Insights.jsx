@@ -7,7 +7,6 @@ import { Data } from "./Data"
 
 
 const Insights = () => {
-    console.log(Data)
     return (
         <InsightContainer>
             {Data?.map(({ id, Title, Value, Percentage, Icon }) => (
