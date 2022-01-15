@@ -16,7 +16,7 @@ const Manage = () => {
   const dispatch = useDispatch();
 
   const router = useRouter();
-  VerifiSession(router)
+  // VerifiSession(router)
 
   const theme = useSelector((state) => state.theme.theme)
   const SectId = useSelector((state) => state.handleactive.SectId);

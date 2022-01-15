@@ -16,10 +16,11 @@ import { IndexValidation } from "../../utils/auth";
 
 const Index = () => {
 
+
     const dispatch = useDispatch();
     const router = useRouter();
 
-    IndexValidation(router)
+    // IndexValidation(router)
 
     // graphql requests
     const [username, setUsername] = useState('')
@@ -84,3 +85,4 @@ const Index = () => {
 }
 
 export default Index
+

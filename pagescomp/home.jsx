@@ -22,7 +22,7 @@ import { VerifiSession } from '../utils/auth'
 const Homepage = () => {
 
   const router = useRouter();
-  VerifiSession(router)
+  // VerifiSession(router)
 
 
 
