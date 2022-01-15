@@ -161,10 +161,10 @@ const SideBar = () => {
 
                         <Pages id="Dashboard">
                             <Link href="/home">
-                            <Page id="Home" onClick={(e) => ActivePage(e, "Home", "Sect1")}>
-                                <FiHome />
-                                <LinkPage>Home</LinkPage>
-                            </Page>
+                                <Page id="Home" onClick={(e) => ActivePage(e, "Home", "Sect1")}>
+                                    <FiHome />
+                                    <LinkPage>Home</LinkPage>
+                                </Page>
                             </Link>
                             <Page id="Analytics" onClick={(e) => ActivePage(e, "Analytics", "Sect1")}>
                                 <MdOutlineAnalytics />
@@ -227,10 +227,12 @@ const SideBar = () => {
                             <H3>Staff</H3>
                         </Section>
                         <Pages id="Staff">
-                            <Page id="Manage" onClick={(e) => ActivePage(e, "Manage", "Sect4")}>
-                                <MdManageAccounts />
-                                <LinkPage>Manage</LinkPage>
-                            </Page>
+                            <Link href="/staff/manage" >
+                                <Page id="Manage" onClick={(e) => ActivePage(e, "Manage", "Sect4")}>
+                                    <MdManageAccounts />
+                                    <LinkPage>Manage</LinkPage>
+                                </Page>
+                            </Link>
                             <Page id="Anltcs" onClick={(e) => ActivePage(e, "Anltcs", "Sect4")}>
                                 <SiGoogleanalytics />
                                 <LinkPage>Analytics</LinkPage>
@@ -243,7 +245,7 @@ const SideBar = () => {
                     </RoutContainer>
                     <RoutContainer>
                         <Link href="/settings" >
-                            <Section id="Sect5"  onClick={(e) => SpecialLink(e, "Sect5")}>
+                            <Section id="Sect5" onClick={(e) => SpecialLink(e, "Sect5")}>
                                 <AiOutlineSetting />
                                 <H3>Settings</H3>
                             </Section>
