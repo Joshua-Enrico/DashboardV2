@@ -27,7 +27,7 @@ import { handleActive, RemoveId, SafeActiveId, SafeSectId } from "../../redux/Ha
 //handle click outside of the sidebar
 import { useClickAway } from 'react-use';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // nextjs link
 import Link from 'next/link'
@@ -54,10 +54,26 @@ const SideBar = () => {
 
     // handle active pages container vars
     const idList = useSelector((state) => state.handleactive.idList);
-    // handle active page vars
-    const SectId = useSelector((state) => state.handleactive.SectId);
-    const activeId = useSelector((state) => state.handleactive.activeId);
+    const [user , setUser] = useState(null);
+    const currentUser = useSelector((state) => state.user.currentUser);
     useEffect(() => {
+
+        if (currentUser) {
+            setUser(true);
+        }
+
+        if (user === null) {
+            const element = document.getElementById("SideBar");
+            element.classList.add("hide");
+        } else {
+            const element = document.getElementById("SideBar");
+            element.classList.remove("hide");
+        }
+    
+
+
+
+
         if (idList != {} && idList != undefined) {
             let key;
             for (key in idList) {
@@ -67,8 +83,7 @@ const SideBar = () => {
         };
 
 
-
-    }, []);
+    }, [user]);
     // handle active pages container func
     const HandleActive = (e, id) => {
         let dictl = false;
@@ -102,6 +117,8 @@ const SideBar = () => {
         }
 
     }
+
+
 
     // handle active page func
     const ActivePage = (e, id, sectionId) => {
@@ -140,9 +157,11 @@ const SideBar = () => {
         // dispatch(SafeActiveId(undefined))
     }
 
+
+
     return (
         <ThemeProvider theme={theme}>
-            <MainContainer id="SideBar">
+            <MainContainer id="SideBar" className="Sdbr">
                 <TopBar>
                     <Logo>
                         <Image src="dashboard.png" alt="" />

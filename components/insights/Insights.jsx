@@ -1,7 +1,6 @@
 import React from 'react'
 import InsightCards from './Insightcards/InsightCards'
 import { InsightContainer } from './Style'
-
 import { Data } from "./Data"
 
 

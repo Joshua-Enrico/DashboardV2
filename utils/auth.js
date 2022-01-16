@@ -12,7 +12,6 @@ const VerifiSession = (router) => {
 
 
 const Logout = (dispatch, router) => {
-
     dispatch(loginOut())
     router.push({
         pathname: "/",

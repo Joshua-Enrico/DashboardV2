@@ -1,7 +1,9 @@
+// style clases
 import {
     TopRightContainer, Button, ThemeToggle,
     Profile, Info, P, B, Small, UserPhoto, Photo, DropDown, Items, DropDownContainer
 } from "./Style"
+// icons 
 import { CgMenu } from 'react-icons/cg'
 import { BiSun, BiMoon } from 'react-icons/bi'
 import { SwitchTheme } from '../../redux/ThemeRedux';
@@ -15,6 +17,7 @@ import { useRouter } from 'next/router';
 import { Logout } from "../../utils/auth"
 // nextjs link
 import Link from 'next/link'
+import { useAuth } from '../../utils/auth1';
 
 
 const TopRight = () => {
@@ -51,6 +54,15 @@ const TopRight = () => {
         active = false;
     });
 
+
+    //logout funct 
+    const { logout } = useAuth();
+    const LoginOut = () => {
+
+        Logout(dispatch, router)
+
+    }
+
     return (
         <TopRightContainer>
             <Button>
@@ -81,7 +93,7 @@ const TopRight = () => {
                             Setting
                         </Items>
                         </Link>
-                            <Items onClick={() => Logout(dispatch, router)}>
+                            <Items onClick={() => {LoginOut();logout()}}>
                                 <HiOutlineLogout />
                                 Logout
                             </Items>

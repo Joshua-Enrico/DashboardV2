@@ -7,6 +7,7 @@ import { Mobile, Tablet } from '../../styles/Resposive';
 const MainContainer = styled.aside`
     height: 100vh;
     position: fixed;
+
     &:hover{
         overflow-x: hidden;
         &::-webkit-scrollbar{
@@ -22,6 +23,9 @@ const MainContainer = styled.aside`
             border-radius: 10px;       /* roundness of the scroll thumb */
             border: 1px solid ${props => props.theme.Cprimary };  /* creates padding around scroll thumb */
         }
+    }
+    &.hide{
+        display: none;
     }
     
     ${Mobile({

@@ -5,6 +5,7 @@ import { createGlobalStyle } from 'styled-components'
 const GlobalStyle = createGlobalStyle`
   body {
     background-image: ${props => props.theme.background};
+    background-color: ${props => props.theme.Cbackground};
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -17,7 +18,7 @@ const Boxform = styled.div`
         margin: 1.2rem auto;
         margin-top: 6%;
         width: 80%;
-        background: #FFFFFF;
+        background: ${props => props.theme.Clight};
         border-radius: 10px;
         overflow: hidden;
         display: flex;
@@ -35,12 +36,11 @@ const Boxform = styled.div`
         }
 
 
-
     `
 
 const Left = styled.div`
         width: 80%;
-        color: #FFFFFF;
+        color: ${props => props.theme.primary};
         background-size: cover;
         background-repeat: no-repeat;
         background-image: url("https://static.vecteezy.com/system/resources/previews/002/800/120/non_2x/admin-control-panel-vector.jpg");
@@ -101,6 +101,7 @@ const Right = styled.div`
 `
 
 const H5 = styled.h5`
+        color: ${props => props.theme.Cdark};
         margin-top:5rem;
         font-size: 6vmax;
         line-height: 0;
@@ -152,6 +153,10 @@ const RememberCont = styled.div`
             }
         }
 
+        & > p {
+                color: ${props => props.theme.Cdark};
+        }
+
 `
 
 const Input2 = styled.input`
@@ -183,6 +188,7 @@ const CheckText = styled.span`
         display: inline-block;
         height: auto;
         position: relative;
+        color: ${props => props.theme.Cdark};
         cursor: pointer;
         transition: all 0.2s linear;
 `

@@ -1,5 +1,6 @@
+## Store Managment
+GraphQL(MongoDb from outside api), Next.js, React, Redux, Redux persist, Auth(jwt) 
 
-## Getting Started
 
 First, run the development server:
 

@@ -3,15 +3,12 @@ import { ThemeProvider } from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
 import { ImFacebook } from 'react-icons/im';
 import { AiOutlineTwitter } from 'react-icons/ai';
-import Link from 'next/link'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // importins mutations / queries
 import  {LoginRequest, LoginRequest2} from "../../apiGraphql/Apicalls"
 
 import { useRouter } from 'next/router';
-import { IndexValidation } from "../../utils/auth";
-
-
+import { useAuth } from '../../utils/auth1';
 
 
 const Index = () => {
@@ -26,17 +23,25 @@ const Index = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const { isFetching, error } = useSelector((state) => state.user)
+    const { loginWithToken } = useAuth();
+
+ 
 
     const LoginQuery = async () => {
-        console.log("hello")
         //LoginRequest2(username, password)
-        LoginRequest(dispatch, router ,{username, password})
-        // const res =  await LoginRequest(username, password)
-        // if (res.data.data.errors) {
-        //     console.log(res.data.data.rrors)
-        // } else if(res.data.data) {
-        //     console.log(res.data.data)
-        // }
+        // LoginRequest(dispatch, router ,{username, password})
+        const res =  await LoginRequest(dispatch, router ,{username, password}).then(res => {
+
+            return res
+        }).catch(err => {
+
+            return err
+        })
+        if (res.data.data.login.token){
+            loginWithToken()
+            router.push('/home')
+        }
+
     }
 
     const theme = useSelector((state) => state.theme.theme)

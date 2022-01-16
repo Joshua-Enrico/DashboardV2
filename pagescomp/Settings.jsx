@@ -1,18 +1,15 @@
 import Head from 'next/head'
-import { useDispatch, useSelector } from 'react-redux'
-import SideBar from '../components/sidebar/SideBar'
-import Insights from '../components/insights/Insights'
+// style classes
 import { Main, MainContainer, Title, RightSide, GlobalStyle } from '../styles/Style'
-import { ThemeProvider } from 'styled-components';
-import Date from '../components/date/Date';
-import RecentOrds from '../components/recentOrders/RecentOrds'
-import TopRight from '../components/topright/TopRight'
-import RecentUpdates from '../components/recentUpdates/RecentUpdates'
-import SalesAnalytics from '../components/salesAnalytics/SalesAnalytics'
-import { useEffect } from 'react'
+// persist store and reducers
+import { useDispatch, useSelector } from 'react-redux'
 import { SafeActiveId, SafeSectId } from '../redux/HandleRedux'
-import { useRouter } from 'next/router'
-import { VerifiSession } from '../utils/auth'
+// react lib
+import { useEffect } from 'react'
+// components
+import { ThemeProvider } from 'styled-components';
+import TopRight from '../components/topright/TopRight'
+
 
 
 
@@ -21,8 +18,6 @@ import { VerifiSession } from '../utils/auth'
 const Settings = () => {
   const dispatch = useDispatch();
 
-  const router = useRouter();
-  VerifiSession(router)
 
   const theme = useSelector((state) => state.theme.theme)
   const SectId = useSelector((state) => state.handleactive.SectId);
@@ -60,7 +55,7 @@ const Settings = () => {
         <MainContainer>
           <div></div>
           <Main>
-
+            <Title>Settings</Title>
           </Main>
           <RightSide>
             <TopRight />

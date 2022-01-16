@@ -1,3 +1,4 @@
+// styles tagas
 import { RecentOrdersContainer, Title, Table,
          Thead, Tr, Th, Tbody, ShowAll } from "./Style"
 import { Data } from "./Data"

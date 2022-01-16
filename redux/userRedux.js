@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { lightTheme, darkTheme } from "../styles/Theme";
-
 
 const userSlice = createSlice({
     name: "user",
@@ -14,7 +12,6 @@ const userSlice = createSlice({
             state.isFetching = true;
         },
         loginSuccess: (state, action) => {
-            console.log(action)
             state.isFetching = false;
             state.currentUser = action.payload;
             state.error = false;

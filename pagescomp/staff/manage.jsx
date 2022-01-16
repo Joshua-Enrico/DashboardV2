@@ -26,7 +26,6 @@ const Manage = () => {
 
   useEffect(() => {
     if (SectId !== undefined && SectId !== "Sect4") {
-      console.log("removing active class")
       document.getElementById(SectId).classList.remove("active");
     }
     if (activeId !== undefined) {
