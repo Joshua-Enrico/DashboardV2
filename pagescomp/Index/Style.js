@@ -214,7 +214,7 @@ const PanelsContainer = styled.div`
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         ${IndexMobile({
-                zIndex: '10',
+                
                 gridTemplateColumns: '1fr',
                 gridTemplateRows: '1fr 2fr 1fr',
             })}
