@@ -38,14 +38,19 @@ const Index = () => {
         e.preventDefault()
         //LoginRequest2(username, password)
         // LoginRequest(dispatch, router ,{username, password})
-        const res = await LoginRequest(dispatch, router, { username, password }).then(res => {
+        if (username === '' || password === '') {
+            alert("Please fill all the fields")
+        }
+        if (username !== '' || password !== '') {
 
-            return res
-        }).catch(err => {
 
-            return err
-        })
-        if (res.data.login != null) {
+            const res = await LoginRequest(dispatch, router, { username, password }).then(res => {
+
+                return res
+            }).catch(err => {
+
+                return err
+            })
             if (res.data.data.login.token) {
                 loginWithToken()
                 router.push('/home')
@@ -94,7 +99,7 @@ const Index = () => {
                                 <div><MdPassword /></div>
                                 <TextInput type="password" placeholder="password" onChange={(event) => setPassword(event.target.value)} />
                             </InputFields>
-                            <Submit type="submit" onClick={(e) => LoginQuery(e)}>Sign in</Submit>
+                            <Submit onClick={(e) => LoginQuery(e)}>Sign in</Submit>
                             <SocialText>or Sign in with social platforms</SocialText>
                             <SocialDiv>
                                 <div><BsFacebook /></div>
