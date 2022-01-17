@@ -1,6 +1,7 @@
 export const darkTheme = {
     mode: "dark",
     Cprimary: '#7380ec',
+    Ch5: 'white',
     Cdanger: '#ff7782',
     Csuccess: '#41f1b6',
     Cwarning: '#ffbb55',
@@ -10,6 +11,7 @@ export const darkTheme = {
     Cdark: '#edeffd',
     Clight: 'rgba(0, 0, 0, 0.4)',
     CprimaryVariant: '#111e88',
+    Csecondary: '#101010',
     CdarkVariant: '#a3bdcc',
     Cbackground: '#181a1e',
     
@@ -33,11 +35,13 @@ export const lightTheme = {
     Csuccess: '#41f1b6',
     Cwarning: '#ffbb55',
     Cwhite: '#fff',
+    Ch5: 'white',
     CinfoDark: '#7d8da1',
     CinfoLight: '#dce1eb',
     Cdark: '#363949',
     Clight: 'rgba(132, 139, 200, 0.18)',
     CprimaryVariant: '#111e88',
+    Csecondary: '#f5f5f5',
     CdarkVariant: '#677483',
     Cbackground: '#f6f6f9',
     
