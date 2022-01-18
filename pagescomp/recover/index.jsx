@@ -15,10 +15,13 @@ import { BsFacebook, BsWhatsapp, BsFillPersonFill } from 'react-icons/bs';
 import { FaMailBulk } from 'react-icons/fa';
 import { MdPassword } from 'react-icons/md';
 
+const jwt = require('jsonwebtoken');
+
+//token from url
 
 
 
-const Index = () => {
+const RcoverAccount = () => {
 
 
     const dispatch = useDispatch();
@@ -90,16 +93,16 @@ const Index = () => {
                 <FormContainer>
                     <SignInUp>
                         <SignInForm className="signin">
-                            <Tittle>Sign In</Tittle>
+                            <Tittle>New Password</Tittle>
                             <InputFields>
-                                <div><BsFillPersonFill /></div>
-                                <TextInput type="text" placeholder="username" onChange={(event) => setUsername(event.target.value)} />
+                                <div><MdPassword /></div>
+                                <TextInput type="text" placeholder="password" onChange={(event) => setUsername(event.target.value)} />
                             </InputFields>
                             <InputFields>
                                 <div><MdPassword /></div>
-                                <TextInput type="password" placeholder="password" onChange={(event) => setPassword(event.target.value)} />
+                                <TextInput type="password" placeholder="repat password" onChange={(event) => setPassword(event.target.value)} />
                             </InputFields>
-                            <Submit onClick={(e) => LoginQuery(e)}>Sign in</Submit>
+                            <Submit onClick={(e) => LoginQuery(e)}>Reset Password</Submit>
                             <SocialText>or Sign in with social platforms</SocialText>
                             <SocialDiv>
                                 <div><BsFacebook /></div>
@@ -109,10 +112,14 @@ const Index = () => {
                             </SocialDiv>
                         </SignInForm>
                         <SignInForm className="recover">
-                            <Tittle>Revocer Account</Tittle>
+                            <Tittle>Log In</Tittle>
                             <InputFields>
                                 <div><BsFillPersonFill /></div>
-                                <TextInput type="text" placeholder="email" />
+                                <TextInput type="text" placeholder="username" onChange={(event) => setUsername(event.target.value)} />
+                            </InputFields>
+                            <InputFields>
+                                <div><MdPassword /></div>
+                                <TextInput type="password" placeholder="password" onChange={(event) => setPassword(event.target.value)} />
                             </InputFields>
                             <Submit type="submit" >Sent Email</Submit>
                             <SocialText>or Sign in with social platforms</SocialText>
@@ -129,7 +136,7 @@ const Index = () => {
                 <PanelsContainer>
                     <Panel className="left-panel">
                         <Content>
-                            <H3>Did you forget your password?</H3>
+                            <H3>Is ok forget things, take your time</H3>
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, minus!</p>
                             <Bottom id="leftbottom" className="lbottom" onClick={() => HandleTransition()}>Recover</Bottom>
                         </Content>
@@ -137,7 +144,7 @@ const Index = () => {
                     </Panel>
                     <Panel className="right-panel">
                         <Content>
-                            <H3>Already on our Team?</H3>
+                            <H3>Welcome back</H3>
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, minus!</p>
                             <Bottom id="rightbottom" type="submit" className="rbottom" onClick={() => HandleTransition1()}>Sign In</Bottom>
                         </Content>
@@ -152,5 +159,5 @@ const Index = () => {
     )
 }
 
-export default Index
+export default RcoverAccount
 

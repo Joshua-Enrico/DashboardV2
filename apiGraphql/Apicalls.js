@@ -1,7 +1,9 @@
 const axios = require("axios")
 import { LoginMutation } from "./mutations.js"
 import { loginStart, loginSuccess, loginFailure } from "../redux/userRedux.js"
-
+import { ValResetQry } from "./querys.js"
+const jwt = require('jsonwebtoken');
+const CryptoJS = require("crypto-js");
 
 const  LoginRequest =  async (dispatch, router , user) =>{
     dispatch(loginStart())
@@ -45,4 +47,22 @@ const LoginRequest2 = async (username, password) =>{
     }
 }
 
-export { LoginRequest, LoginRequest2};
+
+const VerifyResetRqst = async (token) =>{
+
+
+    const res = await axios.post(process.env.API_URL, {
+        query: ValResetQry(token)
+    })
+    .then((res) => {
+        return res
+    })
+    .catch((error) => {
+        return error
+    });
+    
+    return res.data
+
+}
+
+export { LoginRequest, LoginRequest2, VerifyResetRqst};
