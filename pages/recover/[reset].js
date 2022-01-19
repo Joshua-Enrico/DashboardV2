@@ -1,44 +1,41 @@
 
 import RcoverAccount from '../../pagescomp/recover/index';
-import { store } from "../../redux/Store";
 import { useAuth } from '../../utils/auth1';
 import { useRouter } from 'next/router';
-import { FaBullseye } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import PreloaderComp from '../../components/preloader/preloaderComp';
 import { VerifyResetRqst } from '../../apiGraphql/Apicalls';
-const jwt = require('jsonwebtoken');
-const CryptoJS = require("crypto-js");
 export default function Recover() {
   const router = useRouter();
-  
+  const { isLoadingProtected, setAccess, allowed } = useAuth();
 
-  console.log(router.query.reset);
-  async function VerifyReset(token) {
-    const res = await VerifyResetRqst(token);
-    console.log(res);
-  }
-  VerifyReset(router.query.reset)
 
-  
 
-  //   const { isAuthenticated, isLoading } = useAuth();
+  useEffect(async () => {
+    if (!router.isReady) {
+      return;
+    }
+    const res = await VerifyResetRqst(router.query.reset);
+    if(res.errors){
+      setAccess(false);
+      router.push({
+        pathname: '/',
+      });
 
-  //   useEffect(() => {
-  //     if(!isLoading && isAuthenticated) {
-  //       router.push({
-  //         pathname: "/home",
-  //       })
-  //     }
+    } else {
+      setAccess(true);
+    }
 
-  //   }, [isAuthenticated, isLoading])
+    
+    // setAccess(true);
 
-  //   if (isLoading || isAuthenticated) {
-  //     return <PreloaderComp />
-  //   };
-  // console.log(router.query.reset);
-  // const DecodedToken = jwt.decode(router.query.reset);
-  // console.log(DecodedToken);
+  }, [router.isReady, setAccess]);
+
+
+
+    if (isLoadingProtected || !allowed) {
+      return <PreloaderComp />
+    }
 
   return (
     <RcoverAccount />

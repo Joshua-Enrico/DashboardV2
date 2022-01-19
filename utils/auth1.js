@@ -8,6 +8,9 @@ function AuthProvider({ children }) {
     });
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    // loader for special protected route
+    const [isLoadingProtected, setIsLoadingProtected] = useState(true);
+    const [ allowed, setAllowed ] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -40,6 +43,11 @@ function AuthProvider({ children }) {
         });
         localStorage.removeItem('token');
     }
+    function setAccess(res) {
+        setAllowed(res);
+        setIsLoadingProtected(false);
+
+    }
 
     return (
         <AuthContext.Provider
@@ -50,6 +58,9 @@ function AuthProvider({ children }) {
                 logout,
                 loginWithToken,
                 isLoading,
+                isLoadingProtected,
+                allowed,
+                setAccess,
             }}
         >
             {children}
