@@ -10,35 +10,61 @@ export default function Recover() {
   const { isLoadingProtected, setAccess, allowed } = useAuth();
 
 
+  const [id, setId] = useState('');
+  const [name, setName] = useState('');
 
   useEffect(async () => {
     if (!router.isReady) {
       return;
     }
-    const res = await VerifyResetRqst(router.query.reset);
-    if(res.errors){
-      setAccess(false);
+    if (allowed) {
+      console.log("allowed")
+      return;
+    }
+    const res = await VerifyResetRqst(router.query.reset)
+      .then(res => {
+        return res
+      })
+      .catch(err => {
+      });
+    if (res) {
+      if (res.errors) {
+        console.log("error")
+        setAccess(false);
+        router.push({
+          pathname: '/',
+        });
+
+      } else {
+        console.log(res.data.resetValidate)
+        setId(res.data.resetValidate.id);
+        setName(res.data.resetValidate.name);
+        setAccess(true);
+      }
+    } else {
       router.push({
         pathname: '/',
       });
-
-    } else {
-      setAccess(true);
     }
 
-    
+
+
     // setAccess(true);
 
-  }, [router.isReady, setAccess]);
+  }, [router.isReady, setAccess, allowed]);
 
 
 
-    if (isLoadingProtected || !allowed) {
-      return <PreloaderComp />
-    }
+  if (isLoadingProtected || !allowed) {
+    return <PreloaderComp />
+  }
 
   return (
-    <RcoverAccount />
+    <RcoverAccount
+      name={name}
+      id={id}
+
+    />
   )
 }
 

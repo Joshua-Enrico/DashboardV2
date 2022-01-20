@@ -336,6 +336,23 @@ const Submit = styled.button`
 
 `
 
+const Submit1 = styled.span`
+        width: 150px;
+        height: 49px;
+        border: none;
+        outline: none;
+        border-radius: 49px;
+        cursor: pointer;
+        background-color: #7380ec;
+        color: #fff;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin: 10px 0;
+        transition: .5s;
+
+
+`
+
 const Bottom = styled.button`
         width: 130px;
         height: 41px;
@@ -395,4 +412,4 @@ const SocialDiv = styled.div`
 export  { GlobalStyle, MainContainer, FormContainer,
         PanelsContainer, SignInUp , SignInForm, Tittle,
         InputFields, Itag, TextInput, Submit , SocialText,
-        SocialDiv, Panel, Content, H3, LeftImg, Bottom};
+        SocialDiv, Panel, Content, H3, LeftImg, Bottom, Submit1};

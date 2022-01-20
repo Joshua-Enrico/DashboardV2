@@ -15,4 +15,13 @@ function LoginMutation(username, password) {
     }`
 }
 
-export { LoginMutation };
+function MailingResetLink(email) {
+    return `mutation {
+        recoverPassword(
+            email: "${email}"
+        )
+    }`
+
+}
+
+export { LoginMutation, MailingResetLink };

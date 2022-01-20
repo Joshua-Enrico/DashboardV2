@@ -2,9 +2,21 @@
 function ValResetQry(id) {
     return `query {
         resetValidate(
-            UserId: "${id}"
-            )
+          UserId: "${id}"){
+    					id
+    					name
+ 				 }
       }`
 }
 
-export { ValResetQry };
+function ResetPassword(id, pwd, rpeatedpwd) {
+  return `mutation {
+    resetPassword(
+      id: "${id}"
+      password: "${pwd}"
+      confirmPassword: "${rpeatedpwd}"
+    )
+  }`
+}
+
+export { ValResetQry, ResetPassword };

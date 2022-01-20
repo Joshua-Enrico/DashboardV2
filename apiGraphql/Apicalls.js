@@ -1,7 +1,7 @@
 const axios = require("axios")
-import { LoginMutation } from "./mutations.js"
-import { loginStart, loginSuccess, loginFailure } from "../redux/userRedux.js"
-import { ValResetQry } from "./querys.js"
+import { LoginMutation, MailingResetLink } from "./mutations.js"
+import { loginStart, loginSuccess, loginFailure, requesting } from "../redux/userRedux.js"
+import { ResetPassword, ValResetQry } from "./querys.js"
 const jwt = require('jsonwebtoken');
 const CryptoJS = require("crypto-js");
 
@@ -21,17 +21,17 @@ const  LoginRequest =  async (dispatch, router , user) =>{
         //         pathname: '/home',
         //     });
         
-        // } 
+        // }
         
         if (res.data.errors) {
-            dispatch(loginFailure())
+            return { isSuccess: false, message: res.data.errors[0].message }
         }
-        return res
+        return { isSuccess: true, message: res.data.data.login }
 
     })
     .catch((error) => {
         dispatch(loginFailure())
-        return error
+        return { ServerError: true, message: "Server Error Try Again Later", error: error }
     });
     return res
 }
@@ -50,7 +50,6 @@ const LoginRequest2 = async (username, password) =>{
 
 const VerifyResetRqst = async (token) =>{
 
-
     const res = await axios.post(process.env.API_URL, {
         query: ValResetQry(token)
     })
@@ -65,4 +64,45 @@ const VerifyResetRqst = async (token) =>{
 
 }
 
-export { LoginRequest, LoginRequest2, VerifyResetRqst};
+
+const ResetPwd = async (id, newPassword, replyPassword, dispatch) =>{
+    dispatch(requesting())
+
+    const res = await axios.post(process.env.API_URL, {
+        query: ResetPassword(id, newPassword, replyPassword)
+    }).then((res) => {
+        if (res.data.errors !== undefined) {
+            return { isSuccess: false, message: res.data.errors.message[0].message}
+        } else {
+            return { isSuccess: true, message: res.data.data.resetPassword }
+        }
+    }).catch((error) => {
+        return { ServerError: true, message: "Server Error Try Again Later", error: error }
+    });
+    
+    return res
+}
+
+const EmailConfirmation = async (email, dispatch) =>{
+    dispatch(requesting())
+
+    const res = await axios.post(process.env.API_URL, {
+        query: MailingResetLink(email)
+    }).then((res) => {
+
+        if (res.data.errors !== undefined) {
+            return { isSuccess: false, message: res.data.errors[0].message }
+        } else {
+            return { isSuccess: true, message: res.data.data.recoverPassword }
+        }
+    }).catch((error) => {
+
+        return { ServerError: true, message: "Server Error Try Again Later", error: error }
+
+    })
+
+    return res
+
+}
+
+export { LoginRequest, LoginRequest2, VerifyResetRqst, ResetPwd, EmailConfirmation};

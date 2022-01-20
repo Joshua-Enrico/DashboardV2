@@ -13,6 +13,8 @@ import { AuthProvider } from '../utils/auth1';// Authprovider is used to pass us
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
+
+  console.log(router.pathname);
   return (
     <AuthProvider>
     <Provider store={store} >
@@ -24,7 +26,7 @@ function MyApp({ Component, pageProps }) {
         showOnShallow={true}
       />
       <PersistGate loading={null} persistor={persistor} >
-        {router.pathname === '/' ? null : <SideBar />}
+        {router.pathname !== '/' ? <SideBar /> : null}
 
         <Component {...pageProps} />
       </PersistGate>
