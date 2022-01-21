@@ -16,9 +16,9 @@ import { BsFacebook, BsWhatsapp, BsFillPersonFill } from 'react-icons/bs';
 import { FaMailBulk } from 'react-icons/fa';
 import { MdPassword } from 'react-icons/md';
 
-// email validator
-import validator from 'validator'
+
 import Loader from "../../components/loader/Loader";
+import { LoginHandler, SentMailHandler } from "./handlers";
 
 
 const Index = () => {
@@ -29,7 +29,7 @@ const Index = () => {
 
     // IndexValidation(router)
 
-    // graphql requests
+    // needed variables
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [loginError, setLoginError] = useState('')
@@ -46,39 +46,15 @@ const Index = () => {
 
     const LoginQuery = async (e) => {
         e.preventDefault()
-        setServerErrorLogin('')
-        setLoginError('')
-
-        //LoginRequest2(username, password)
-        // LoginRequest(dispatch, router ,{username, password})
-        // if (username === '' || password === '') {
-        //     alert("Please fill all the fields")
-        // }
-        if (username !== '' || password !== '') {
-
-            const res = await LoginRequest(dispatch, router, { username, password }).then(res => {
-
-                return res
-            }).catch(err => {
-                return err
-            })
-            if (res.ServerError) {
-                setServerErrorLogin(res.message)
-                setLoginError('')
-
-            } else if (res.isSuccess === true) {
-                loginWithToken()
-                router.push('/home')
-            } else if (res.isSuccess === false) {
-                setLoginError(res.message)
-                setServerErrorLogin('')
-            }
-            dispatch(endRequest())
-        }
-
+        const from = 'index'
+        // this function will handle all the login operation
+        LoginHandler(from, router, endRequest, loginWithToken, setServerErrorLogin, setLoginError, username, password, dispatch)
     }
 
-
+    const SentMail = async (e) => {
+        e.preventDefault()
+        SentMailHandler(setEmailError, setEmailSuccess, setServerError, dispatch, email, endRequest)
+    }
 
 
     const HandleTransition = () => {
@@ -93,45 +69,7 @@ const Index = () => {
         Container.classList.remove('sign-up-mode')
     }
 
-    const SentMail = async (e) => {
-        e.preventDefault()
-        setEmailError('')
-        setEmailSuccess('')
-        setServerError('')
 
-        if (validator.isEmail(email)) {
-            const res = await EmailConfirmation(email, dispatch)
-                .then(res => {
-                    return res
-                }).catch(err => {
-                    return err
-                })
-            if (res.isSuccess === false) {
-                console.log(res.message)
-                setEmailError(res.message)
-                setEmailSuccess('')
-                setServerError('')
-            } else if (res.isSuccess === true) {
-                // reset input
-                setEmailSuccess(res.message)
-                setEmailError('')
-                setServerError('')
-            } else {
-                //if server error
-                setServerError(res.message)
-                setEmailError('')
-                setEmailSuccess('')
-
-            }
-            dispatch(endRequest())
-
-        } else {
-            setEmailError('Enter valid Email!')
-            setEmailSuccess('')
-            setServerError('')
-
-        }
-    }
 
 
     const theme = useSelector((state) => state.theme.theme)

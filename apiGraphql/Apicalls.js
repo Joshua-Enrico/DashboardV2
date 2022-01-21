@@ -5,7 +5,7 @@ import { ResetPassword, ValResetQry } from "./querys.js"
 const jwt = require('jsonwebtoken');
 const CryptoJS = require("crypto-js");
 
-const  LoginRequest =  async (dispatch, router , user) =>{
+const  LoginRequest =  async (dispatch  , user) =>{
     dispatch(loginStart())
     // router.push({
     //     pathname: '/home',

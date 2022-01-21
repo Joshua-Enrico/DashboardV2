@@ -1,12 +1,11 @@
-import { GlobalStyle, MainContainer, FormContainer, PanelsContainer, SignInUp, SignInForm, Tittle, InputFields, Itag, TextInput, Submit, SocialText, SocialDiv, Panel, Content, H3, LeftImg, Bottom } from "./Style"
+//styled classses
+import { GlobalStyle, MainContainer, FormContainer, PanelsContainer, SignInUp, SignInForm, Tittle, InputFields, Itag,
+         TextInput, Submit, SocialText, SocialDiv, Panel, Content, H3, LeftImg, Bottom } from "./Style"
 import { ThemeProvider } from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
-import { ImFacebook } from 'react-icons/im';
-import { AiOutlineTwitter } from 'react-icons/ai';
-import { useEffect, useState } from "react";
+
+import { useState } from "react";
 import { endRequest } from "../../redux/userRedux.js";
-// importins mutations / queries
-import { LoginRequest, LoginRequest2, ResetPwd } from "../../apiGraphql/Apicalls"
 
 import { useRouter } from 'next/router';
 import { useAuth } from '../../utils/auth1';
@@ -16,21 +15,15 @@ import { BsFacebook, BsWhatsapp, BsFillPersonFill } from 'react-icons/bs';
 import { FaMailBulk } from 'react-icons/fa';
 import { MdPassword } from 'react-icons/md';
 import Loader from "../../components/loader/Loader";
-
-const jwt = require('jsonwebtoken');
-
-//token from url
-
-
+import { LoginHandler } from "../Index/handlers";
+import { HandlerResestPwdFunc } from "./handlers";
 
 const RcoverAccount = ({ id, name }) => {
 
     const dispatch = useDispatch();
     const router = useRouter();
 
-    // IndexValidation(router)
-
-    // graphql requests
+    // needed variables
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [Rsuccess, setRsuccess] = useState('')
@@ -39,49 +32,38 @@ const RcoverAccount = ({ id, name }) => {
     const [serverErrorLogin, setServerErrorLogin] = useState('')
     const [loginError, setLoginError] = useState('')
 
+    // functions and variables from redux
     const { isFetching, error } = useSelector((state) => state.user)
+    // use context function
     const { loginWithToken } = useAuth();
 
     // new user password
     const [newPassword, setNewPassword] = useState('')
     const [replyPassword, setReplyPassword] = useState('')
 
-
-
+    // function to start Login process
     const LoginQuery = async (e) => {
         e.preventDefault()
-        setServerErrorLogin('')
-        setLoginError('')
-        //LoginRequest2(username, password)
-        // LoginRequest(dispatch, router ,{username, password})
-        // if (username === '' || password === '') {
-        //     alert("Please fill all the fields")
-        // }
-        if (username !== '' || password !== '') {
-
-            const res = await LoginRequest(dispatch, router, { username, password }).then(res => {
-
-                return res
-            }).catch(err => {
-                return err
-            })
-            if (res.ServerError) {
-                setServerErrorLogin(res.message)
-                setLoginError('')
-
-            } else if (res.isSuccess === true) {
-                loginWithToken()
-                router.push('/')
-            } else if (res.isSuccess === false) {
-                setLoginError(res.message)
-                setServerErrorLogin('')
-            }
-            dispatch(endRequest())
-        }
+        const from = 'recover'
+        LoginHandler(
+            from ,router, endRequest,loginWithToken,
+            setServerErrorLogin, setLoginError,
+            username, password, dispatch
+            )
 
     }
 
+    // function to start reset pwd request process
+    const ResetPasswordFunc = async (e) => {
+        e.preventDefault()
+        HandlerResestPwdFunc(id,newPassword, replyPassword, dispatch,
+            setRerror,setRserverError, setRsuccess, HandleTransition, endRequest
+            )
 
+
+    }
+
+    // handle transitions
     const HandleTransition = () => {
 
         const Container = document.querySelector('.container')
@@ -92,49 +74,7 @@ const RcoverAccount = ({ id, name }) => {
         Container.classList.add('sign-up-mode')
 
     }
-    const HandleTransition1 = () => {
 
-        const Container = document.querySelector('.container')
-
-
-        Container.classList.remove('sign-up-mode')
-
-    }
-
-    const ResetPasswordFunc = async (e) => {
-        e.preventDefault()
-        console.log(newPassword, replyPassword)
-        if ((newPassword !== '' && replyPassword !== '') && (newPassword === replyPassword)) {
-            const res = await ResetPwd(id, newPassword, replyPassword, dispatch)
-                .then(res => {
-                    return res
-                }).catch(err => {
-
-                    return err
-                })
-            console.log(res)
-            if (res.isSuccess === false) {
-                setRerror(res.message)
-                setRserverError('')
-                setRsuccess('')
-            } else if (res.isSuccess === true) {
-                setRsuccess(res.message)
-                setRerror('')
-                setRserverError('')
-                HandleTransition()
-            } else {
-                setRserverError(res.message)
-                setRerror('')
-                setRsuccess('')
-            }
-            dispatch(endRequest())
-        } else {
-            setRerror('Password Does not match')
-            setRserverError('')
-            setRsuccess('')
-        }
-
-    }
     const theme = useSelector((state) => state.theme.theme)
     return (
         <ThemeProvider theme={theme}>
@@ -201,7 +141,6 @@ const RcoverAccount = ({ id, name }) => {
                         <Content>
                             <H3>Welcome back</H3>
                             <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci, minus!</p>
-                            <Bottom id="rightbottom" type="submit" className="rbottom" onClick={() => HandleTransition1()}>Sign In</Bottom>
                         </Content>
                         <LeftImg src="Team.svg" className="image rightimg" alt="" />
                     </Panel>
