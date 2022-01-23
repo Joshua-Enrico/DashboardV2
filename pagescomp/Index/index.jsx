@@ -1,14 +1,13 @@
+//styled classses
 import { GlobalStyle, MainContainer, FormContainer, PanelsContainer, SignInUp, SignInForm, Tittle, InputFields, Itag, TextInput, Submit, SocialText, SocialDiv, Panel, Content, H3, LeftImg, Bottom } from "./Style"
 import { ThemeProvider } from 'styled-components';
 import { useDispatch, useSelector } from "react-redux";
-import { ImFacebook } from 'react-icons/im';
-import { AiOutlineTwitter } from 'react-icons/ai';
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { endRequest } from "../../redux/userRedux.js";
-// importins mutations / queries
-import { EmailConfirmation, LoginRequest, LoginRequest2 } from "../../apiGraphql/Apicalls"
 
 import { useRouter } from 'next/router';
+
+// handle protected route
 import { useAuth } from '../../utils/auth1';
 
 //icons
@@ -43,7 +42,7 @@ const Index = () => {
     const { loginWithToken } = useAuth();
 
 
-
+    // functions and variables from redux
     const LoginQuery = async (e) => {
         e.preventDefault()
         const from = 'index'

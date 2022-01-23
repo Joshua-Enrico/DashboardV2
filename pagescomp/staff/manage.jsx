@@ -8,6 +8,8 @@ import { SafeActiveId, SafeSectId } from '../../redux/HandleRedux'
 import { useRouter } from 'next/router'
 import { VerifiSession } from '../../utils/auth'
 
+import UserList from '../../components/userList/UserList';
+
 
 
 
@@ -47,15 +49,15 @@ const Manage = () => {
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
           <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-          <title>Home</title>
-          <meta name="description" content="Home" />
+          <title>Manage</title>
+          <meta name="description" content="Magane" />
           <link rel="icon" href="/IconPage.png" />
         </Head>
         <GlobalStyle />
         <MainContainer>
           <div></div>
           <Main>
-            MANAGE
+            <UserList />
           </Main>
           <RightSide>
             <TopRight />
